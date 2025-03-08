@@ -13,12 +13,14 @@ dotenv.config();
 
 const _dirName = path.resolve()
 
+console.log(process.env.url)
+
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
   cors({
-    origin: "https://gurukul-e6by.onrender.com/",
+    origin: process.env.url,
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })

@@ -25,7 +25,7 @@ const TutorSchema = new mongoose.Schema({
   hourlyRate: { type: Number, required: false },
 
   assigned: {
-    type: Boolean, default: true
+    type: Boolean, default: false
   },
 
   assignedParents: [

@@ -557,8 +557,8 @@ router.post("/forgot-password", async (req, res) => {
         await user.save();
 
         // ✅ Generate Reset Link (localhost for now)
-        const resetLink = `http://localhost:5173/reset-password?token=${resetToken}`;
-
+        const resetLink = `${process.env.url}reset-password?token=${resetToken}`;
+        
         // Send reset token via email with the link
         const data = { resetLink, email };
         await sendNotification("RESET_PASSWORD", data, "email");
