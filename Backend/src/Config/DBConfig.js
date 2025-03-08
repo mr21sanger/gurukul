@@ -1,7 +1,11 @@
 const mongoose = require("mongoose");
+const dotenv = require("dotenv")
+dotenv.config()
+
+url = process.env.Mongo_Uri
 
 mongoose
-  .connect("mongodb://127.0.0.1:27017/cryptoApp")
+  .connect(url)
   .then(() => {
     console.log("connnection successful");
   })

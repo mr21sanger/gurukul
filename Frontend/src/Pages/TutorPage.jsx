@@ -69,7 +69,7 @@ const TutorPage = () => {
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            onClick={() => setShowForm(true)}
+            onClick={handleClick}
             className="px-4 md:px-6 py-2 md:py-3 bg-orange-600 text-white rounded-md font-semibold shadow-md hover:bg-orange-700 transition-all"
           >
             Post Your Requirement

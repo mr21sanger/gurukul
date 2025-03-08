@@ -9,7 +9,7 @@ const Footer = () => {
                     {/* Left Section */}
                     <div>
                         <p className="text-lg font-medium">
-                            Stay connected with TeachMe for updates, tips, and exclusive offers. Join our community for educational resources and success stories—follow us today!
+                            Stay connected with Gurukul for updates, tips, and exclusive offers. Join our community for educational resources and success stories—follow us today!
                         </p>
                         {/* Social Icons */}
                         <div className="flex justify-center md:justify-start gap-4 mt-4">
@@ -44,7 +44,7 @@ const Footer = () => {
 
                 {/* Bottom Section */}
                 <div className="border-t bg-[#7f370a] w-full px-6 py-4 mt-6 flex flex-col md:flex-row justify-between items-center text-sm text-center">
-                    <p>© 2021 - 2025 TeachMe. All Rights Reserved.</p>
+                    <p>© 2023 - 2025 Gurukul. All Rights Reserved.</p>
 
                     <div className="flex gap-4 mt-4 md:mt-0">
                         <a href="#" className="hover:text-orange-400 transition">Terms of Use</a>

@@ -171,9 +171,9 @@ const HomePage = () => {
             {/* Why Choose Us */}
             <div className="w-full py-16 flex justify-center items-center bg-gradient-to-b from-orange-200 to-orange-100 text-white px-6">
                 <div className="max-w-5xl text-center">
-                    <h2 className="text-5xl font-extrabold mb-8 text-orange-500">Why Choose Us?</h2>
+                    <h2 className="md:text-5xl text-3xl font-extrabold mb-8 text-orange-500">Why Choose Us?</h2>
                     <p className="text-xl text-gray-900 mb-12">Our platform connects students with expert tutors, ensuring personalized learning experiences that drive results.</p>
-                    <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-14">
+                    <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-14 justify-center">
                         {features.map((feature) => (
                             <FeatureCard key={feature.id} {...feature} />
                         ))}

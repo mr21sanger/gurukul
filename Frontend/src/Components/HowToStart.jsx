@@ -36,7 +36,7 @@ const HowToStart = () => {
     return (
         <div className="px-2 min-h-screen py-20 bg-orange-200"
         >
-            <h2 className="text-4xl font-bold text-center text-orange-500 mb-6">How to Get Started</h2>
+            <h2 className="md:text-5xl font-bold text-3xl md:font-extrabold text-center text-orange-500 mb-6">How to Get Started</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-5xl  mx-auto">
                 {studentSteps.map((step, index) => (
                     <StepCard key={index} {...step} />
