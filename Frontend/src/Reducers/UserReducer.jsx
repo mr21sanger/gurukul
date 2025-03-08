@@ -2,7 +2,7 @@ import { createContext, useContext, useReducer, useEffect } from "react";
 import axios from "axios";
 import { io } from "socket.io-client";
 
-const socket = io("http://localhost:3000"); // Connect to Socket.io server
+const socket = io("https://gurukul-e6by.onrender.com/"); // Connect to Socket.io server
 
 const UserContext = createContext();
 
@@ -47,7 +47,7 @@ const reducer = (state, action) => {
 
 export const UserProvider = ({ children }) => {
     const [state, dispatch] = useReducer(reducer, initialValue);
-    const baseUrl = "http://localhost:3000/user";
+    const baseUrl = "https://gurukul-e6by.onrender.com/user";
 
     // DASHBOARD DATA FUNCTION
     const dashboardAccess = async (email) => {
