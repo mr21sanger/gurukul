@@ -151,7 +151,7 @@ const NavigationBar = () => {
                             className="ml-6 bg-gradient-to-r from-orange-400 to-orange-500 text-black px-6 py-3 rounded-full font-bold shadow-md hover:shadow-lg transition duration-300"
                             onClick={() => navigate("/get-started/login")}
                         >
-                            Get Started
+                           Login
                         </motion.button>
                     )}
                 </div>
@@ -219,7 +219,7 @@ const NavigationBar = () => {
                                     setIsOpen(false);
                                 }}
                             >
-                                Get Started
+                                Login
                             </motion.button>
                         )}
                     </motion.div>

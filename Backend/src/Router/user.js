@@ -151,8 +151,7 @@ router.post("/request-tutor", verifyToken, async (req, res) => {
             fee,
             locality,
             phone: parent.userId.phone,
-            chatId: TELEGRAM_CHAT_ID,
-            token: TELEGRAM_BOT_TOKEN
+        
         }
 
         sendNotification("NEW_TUTOR_REQUEST", data, "telegram")
