@@ -1,0 +1,37 @@
+@import "tailwindcss";
+
+@layer utilities {
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+  
+    .animate-float {
+      animation: float 4s ease-in-out infinite;
+    }
+  
+    @keyframes floatingRotate {
+      0%, 100% { transform: rotate(0deg); }
+      50% { transform: rotate(3deg); }
+    }
+  
+    .animate-floating-rotate {
+      animation: floatingRotate 6s ease-in-out infinite;
+    }
+  }
+
+  .input-field {
+    @apply border border-gray-300 p-3 w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 transition;
+  }
+  
+  .btn-primary {
+    @apply flex items-center px-5 py-2 bg-yellow-500 text-white font-medium rounded-lg hover:bg-yellow-600 transition;
+  }
+  
+  .btn-secondary {
+    @apply flex items-center px-5 py-2 bg-gray-300 text-gray-700 font-medium rounded-lg hover:bg-gray-400 transition;
+  }
+  
+  .btn-submit {
+    @apply px-5 py-2 bg-green-500 text-white font-medium rounded-lg hover:bg-green-600 transition;
+  }
