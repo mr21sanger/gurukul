@@ -25,6 +25,9 @@ const TutorDashboard = () => {
         return <Error />;
     }
 
+
+    console.log(user?.assignedParents)
+
     return (
         <div className="container mx-auto p-6 min-h-screen bg-orange-100 mt-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10">
@@ -134,17 +137,41 @@ const TutorDashboard = () => {
                     {/* Assigned Students Section - Always Visible */}
                     <div className="bg-orange-50 p-5 rounded-lg border mb-4">
                         <h3 className="font-medium text-lg text-gray-700">👩‍🎓 Assigned Students</h3>
+
                         {user?.assignedParents?.length > 0 ? (
-                            user.assignedParents?.map((student, index) => (
-                                <div key={index} className="flex justify-between items-center bg-white p-3 rounded-lg border mt-2 shadow-sm hover:shadow-md transition">
-                                    <p><strong>{student.name}</strong> - {student.subject}</p>
-                                    <span className="text-xs bg-orange-700 text-white px-2 py-1 rounded">{student.joinDate}</span>
-                                </div>
-                            ))
+                            user?.assignedParents?.map((student, index) => {
+                                const parent = student?.parentId;
+
+                                return (
+                                    <div
+                                        key={index}
+                                        className="flex flex-col md:flex-row justify-between items-start md:items-center bg-white p-4 rounded-lg border mt-2 shadow-sm hover:shadow-md transition"
+                                    >
+                                        {/* Student Details */}
+                                        <div>
+                                            <p className="text-gray-800 font-semibold">
+                                                {parent?.firstName} {parent?.lastName}
+                                                <span className="text-gray-500 text-sm"> ({parent?.role})</span>
+                                            </p>
+                                            <p className="text-gray-600 text-sm">📧 {parent?.email}</p>
+                                            <p className="text-gray-600 text-sm">📞 {parent?.phone}</p>
+                                            <p className="text-gray-600 text-sm">
+                                                📍 {parent?.address?.street}, {parent?.address?.city}, {parent?.address?.state}, {parent?.address?.zipCode}, {parent?.address?.country}
+                                            </p>
+                                        </div>
+
+                                        {/* Assignment Date */}
+                                        <span className="mt-2 md:mt-0 text-xs bg-orange-700 text-white px-3 py-1 rounded">
+                                            Assigned on: {new Date(student.assignedAt).toLocaleDateString()}
+                                        </span>
+                                    </div>
+                                );
+                            })
                         ) : (
                             <p className="text-gray-500 text-center mt-2">No students assigned yet.</p>
                         )}
                     </div>
+
 
                     {/* Subjects & Expertise */}
                     <AddSubjectBlock subjects={subjects} setSubjects={setSubjects} userId={userId?._id} />

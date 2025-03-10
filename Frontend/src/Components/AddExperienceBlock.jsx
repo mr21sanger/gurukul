@@ -5,7 +5,7 @@ const AddExperience = ({ experience, setExperience, userId }) => {
     const [newExperience, setNewExperience] = useState({ years: "", organization: "" });
     const [addingExperience, setAddingExperience] = useState(false);
 
-    const { addOrEdit } = useUserReducer();
+    const { addOrEdit, removeItem } = useUserReducer();
 
     const handleAddExperience = () => {
         if (newExperience.years && newExperience.organization) {
@@ -24,19 +24,50 @@ const AddExperience = ({ experience, setExperience, userId }) => {
         }
     };
 
+    
+
+    // ✅ Function to Remove Experience
+    const handleRemoveExperience = async (index) => {
+        const expToRemove = experience[index]; // ✅ Get correct experience
+        console.log("hii")
+        if (!expToRemove) return;
+
+        const data = {
+            userId,
+            type: "experience",
+            years: expToRemove.years,
+            organization: expToRemove.organization
+        };
+
+        try {
+            await removeItem(data); // ✅ Remove from backend
+            setExperience((prevExperience) => prevExperience.filter((_, i) => i !== index)); // ✅ Update state
+        } catch (error) {
+            console.error("Error removing experience:", error);
+        }
+    };
+
+
     return (
         <div className="bg-orange-50 p-5 rounded-lg border my-3 shadow-md">
-            <h3 className="font-medium text-lg text-gray-700">📜 Experience & Qualifications</h3>
+            <h3 className="font-medium text-lg text-gray-700">📜 Experience</h3>
 
             {experience.length > 0 ? (
-                experience.map((qualification, index) => (
-                    <div key={index} className="bg-white p-4 rounded-lg border mt-2 shadow-sm hover:shadow-md transition flex flex-col">
-                        <p className="text-gray-800 font-semibold">💼 {qualification.years} years</p>
-                        <p className="text-gray-600">🏢 {qualification.organization}</p>
+                experience.map((exp, index) => (
+                    <div key={index} className="bg-white relative p-4 rounded-lg border mt-2 shadow-sm hover:shadow-md transition flex flex-col">
+                        <p className="text-gray-800 font-semibold">💼 {exp.years} years</p>
+                        <p className="text-gray-600">🏢 {exp.organization}</p>
+                        {/* ✅ Remove Button */}
+                        <button
+                            onClick={() => handleRemoveExperience(index)}
+                            className="absolute top-2 right-2 text-white px-2 py-1 rounded-full text-sm hover:scale-105 transition"
+                        >
+                            ❌
+                        </button>
                     </div>
                 ))
             ) : (
-                <p className="text-gray-500 text-center mt-2">No qualifications or experience added yet.</p>
+                <p className="text-gray-500 text-center mt-2">No exps or experience added yet.</p>
             )}
 
             {addingExperience ? (

@@ -2,7 +2,7 @@ import { createContext, useContext, useReducer, useEffect } from "react";
 import axios from "axios";
 import { io } from "socket.io-client";
 
-const socket = io("https://gurukul-e6by.onrender.com/"); // Connect to Socket.io server
+const socket = io("http://localhost:3000"); // Connect to Socket.io server
 
 const UserContext = createContext();
 
@@ -47,7 +47,7 @@ const reducer = (state, action) => {
 
 export const UserProvider = ({ children }) => {
     const [state, dispatch] = useReducer(reducer, initialValue);
-    const baseUrl = "https://gurukul-e6by.onrender.com/user";
+    const baseUrl = "http://localhost:3000/user";
 
     // DASHBOARD DATA FUNCTION
     const dashboardAccess = async (email) => {
@@ -105,10 +105,12 @@ export const UserProvider = ({ children }) => {
                 const res = await axios.post(`${baseUrl}/addOrEdit`, data, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
+                console.log(data.type, res)
                 let updatedUser = state.user;
                 if (res && data.type === "subject") {
                     updatedUser = { ...state.user, subjects: res.data.subjects };
                 } else if (res && data.type === "schedule") {
+                    console.log("ih")
                     updatedUser = { ...state.user, schedules: res.data.schedules };
                 } else if (res && data.type === "experience") {
                     updatedUser = { ...state.user, experience: res.data.experience };
@@ -123,6 +125,7 @@ export const UserProvider = ({ children }) => {
             }
         }
     };
+
 
     //REMOVE DATA FUNCTION
     const removeItem = async (data) => {
@@ -154,6 +157,7 @@ export const UserProvider = ({ children }) => {
     };
 
 
+
     // LOGIN FUNCTION
     const login = async (data) => {
         try {
@@ -172,6 +176,7 @@ export const UserProvider = ({ children }) => {
 
         }
     };
+
 
     //POST A COMPLAINT
     const postComplaint = async (data) => {
@@ -270,6 +275,7 @@ export const UserProvider = ({ children }) => {
 
         // SOCKET EVENTS
         socket.on("verificationUpdate", (data) => {
+            console.log(data)
             if (state.user && state.user.userId._id === data.userId) {
                 const updatedUser = { ...state.user, isVerified: data.isVerified, verificationStatus: data.verificationStatus };
                 localStorage.setItem("user", JSON.stringify(updatedUser));
@@ -291,9 +297,8 @@ export const UserProvider = ({ children }) => {
             } else if (state?.user?.userId?.role === "Instructor") {
                 updatedUser = {
                     ...state.user,
-                    assignedParents: [...(state.user.assignedParents || []), data?.tutorUpdate],
+                    assignedParents: data?.tutorUpdate,
                     assigned: true,
-
                 };
             }
 

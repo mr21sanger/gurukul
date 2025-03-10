@@ -10,7 +10,7 @@ const AddQualificationBlock = ({ qualifications, setQualifications, userId }) =>
         toYear: "",
         grade: ""
     });
-    const { addOrEdit } = useUserReducer();
+    const { addOrEdit, removeItem } = useUserReducer();
 
     const handleAddQualification = () => {
         if (newQualification) {
@@ -30,17 +30,35 @@ const AddQualificationBlock = ({ qualifications, setQualifications, userId }) =>
         }
     };
 
+    const handleRemoveQualification = async (index) => {
+        const data = {
+            userId,
+            type: "qualification",
+            qualification: qualifications[index]
+        };
+
+        await removeItem(data);
+        const updatedQualifications = qualifications.filter((_, i) => i !== index);
+        setQualifications(updatedQualifications);
+    };
+
     return (
         <div className="bg-orange-50 p-5 rounded-lg border my-3 shadow-md">
             <h3 className="font-medium text-lg text-gray-700">📜 Qualifications</h3>
 
             {qualifications.length > 0 ? (
                 qualifications.map((qualification, index) => (
-                    <div key={index} className="bg-white p-4 rounded-lg border mt-2 shadow-sm hover:shadow-md transition flex flex-col">
+                    <div key={index} className="bg-white p-4 relative rounded-lg border mt-2 shadow-sm hover:shadow-md transition flex flex-col">
                         <p className="text-gray-800 font-semibold">🎓 {qualification.degree}</p>
                         <p className="text-gray-600">🏫 {qualification.institution}</p>
                         <p className="text-gray-600">📆 {qualification.fromYear} - {qualification.toYear}</p>
                         <p className="text-gray-600">📊 Grade: {qualification.grade}</p>
+                        <button
+                            onClick={() => handleRemoveQualification(index)}
+                            className="absolute top-2 right-2 bg-white text-red-500 text-xs px-2 py-1 rounded hover:bg-gray-100"
+                        >
+                            ❌ Remove
+                        </button>
                     </div>
                 ))
             ) : (
