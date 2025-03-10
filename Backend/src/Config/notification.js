@@ -19,75 +19,162 @@ const sendNotification = async (type, data, method) => {
     let message = "";
     let sub = ""
 
-    switch (type) {
-        case "TUTOR_VERIFICATION_APPROVED":
-            message = `Dear ${data?.firstName},\n\nCongratulations! Your verification has been approved. You can now start tutoring on Gurukul.\n\nBest regards,\nGurukul Team`;
-            sub = "Verification Approved";
 
-            break;
-        case "TUTOR_VERIFICATION_REJECTED":
-            message = `Dear ${data?.firstName},\n\nUnfortunately, your verification request has been rejected. Please review your submitted documents and try again after a week.\n\nBest regards,\nGurukul Team`;
-            sub = "Verification Rejected";
+        switch (type) {
+            case "TUTOR_VERIFICATION_APPROVED":
+                subject = "Verification Approved - Welcome to Gurukul!";
+                message = `Dear ${data?.firstName},
+    
+    Congratulations! Your tutor verification has been successfully approved. You are now eligible to start tutoring on Gurukul.
+    
+    We are excited to have you onboard and look forward to your valuable contributions in helping students excel.
+    
+    For any assistance, feel free to reach out to our support team.
+    
+    Best regards,  
+    Gurukul Team`;
+                break;
 
-            break;
 
-        case "TUTOR_ASSIGNED":
 
-            message = `A tutor has been assigned to your request! Tutor: ${data.tutorName}`;
-            break;
+            case "TUTOR_ASSIGNED":
+                subject = "A Tutor Has Been Assigned to Your Request";
+                message = `Dear ${data.parentName},  
+    
+    We are pleased to inform you that a tutor has been assigned to your request. Below are the details:  
+    
+    👨‍🏫 *Tutor Name:* ${data.tutorName}  
+    📧 *Email:* ${data.tutorEmail}  
+    📞 *Phone:* ${data.tutorPhone}  
+    📍 *Address:* ${data.tutorAddress}  
+    
+    Please contact your assigned tutor to coordinate the sessions and begin the learning process.  
+    
+    If you have any concerns or require assistance, please do not hesitate to contact us.
+    
+    Best regards,  
+    Gurukul Team`;
+                break;
 
-        case "NEW_TUTOR_REQUEST":
-            const { orderId, genderPreferred, timePreferred, classLevel, subject, availableDays, fee, locality, phone } = data
-            message = `*Hello! Experts,*  
-            😎 *Order ID:* ${orderId}  
-            🙋 *Gender Preferred:* ${genderPreferred || "Any"}  
-            ⏰ *Time Preferred:* ${timePreferred || "Flexible"}  
-            🏛 *Class:* ${classLevel}  
-            📚 *Subject(s):* ${subject}  
-            ⌛ *Duration:* 1 hr/day  
-            🗓 *Session(s):* ${availableDays} days/week  
-            💴 *Fee:* ₹ ${fee}/month  
-            📍 *Locality:* ${locality}  
 
-             _"Looking forward to a mutually beneficial relationship ❤ always."_  
+            case "TUTOR_ASSIGNMENT_CONFIRMATION":
+                subject = "New Student Assigned to You - Gurukul";
+                message = `Dear ${data.tutorName},  
+    
+    We are pleased to inform you that you have been assigned to a new student on Gurukul. Below are the details:  
+    
+    👩‍🎓 *Student Name:* ${data.parentName}  
+    📧 *Email:* ${data.parentEmail}  
+    📞 *Phone:* ${data.parentPhone}  
+    📍 *Address:* ${data.parentAddress}  
+    
+    Kindly reach out to the student at your earliest convenience to discuss the session schedule and ensure a smooth learning experience.  
+    
+    For any queries, feel free to reach out to our support team.  
+    
+    Best regards,  
+    Gurukul Team`;
+                break;
 
-            *With best,*  
-            *Gurukul Tutors*  
-            *Faridabad*  
-            📳: ${phone}  
-            🌐: www.gurukul.com  
-        `;
-            break;
 
-        case "RESET_PASSWORD":
-            const { resetLink } = data
-            message = `You requested a password reset. Click the link below to reset your password:  
 
-${resetLink}  
+            case "NEW_TUTOR_REQUEST":
+                subject = "New Tutoring Request Available";
+                message = `Hello, Experts!  
+    
+    A new tutoring request has been received. Below are the details:  
+    
+    📌 *Order ID:* ${data.orderId}  
+    👤 *Preferred Tutor Gender:* ${data.genderPreferred || "Any"}  
+    ⏰ *Preferred Time:* ${data.timePreferred || "Flexible"}  
+    🏛 *Class Level:* ${data.classLevel}  
+    📚 *Subjects:* ${data.subject}  
+    ⌛ *Session Duration:* 1 hour/day  
+    🗓 *Sessions Per Week:* ${data.availableDays} days  
+    💰 *Fee Offered:* ₹${data.fee}/month  
+    📍 *Location:* ${data.locality}  
+    📞 *Contact:* ${data.phone}  
+    
+    If you are interested, kindly respond at the earliest.  
+    
+    Best regards,  
+    Gurukul Team  
+    🌐 www.gurukul.com`;
+                break;
 
-This link is valid for 1 hour. If you did not request this, please ignore this email.`;
-            sub = "Reset Your Password";
-            break;
 
-        case "NEW_TUTOR_SIGNUP":
-            message = `A new tutor has signed up: ${data.tutorName}.`;
-            break;
 
-        case "COMPLAINT_SUBMITTED":
-            message = `A new complaint has been submitted by ${data.userName}.`;
-            break;
+            case "RESET_PASSWORD":
+                subject = "Password Reset Request - Gurukul";
+                message = `Dear User,  
+    
+    We received a request to reset your password. To proceed, please click the link below:  
+    
+    🔗 ${data.resetLink}  
+    
+    This link will be valid for the next *one hour*. If you did not request a password reset, please ignore this email or contact our support team.  
+    
+    Best regards,  
+    Gurukul Team`;
+                break;
 
-        case "COMPLAINT_STATUS_UPDATE":
-            message = `Your complaint status has been updated: ${data.status} `;
-            break;
+            case "NEW_TUTOR_SIGNUP":
+                subject = "New Tutor Signup Alert";
+                message = `Dear Admin,  
+    
+    A new tutor has signed up on Gurukul:  
+    
+    👤 *Tutor Name:* ${data.tutorName}  
+    
+    Please review their details and initiate the verification process if necessary.  
+    
+    Best regards,  
+    Gurukul Team`;
+                break;
 
-        case "REALTIME_UPDATE":
-            message = `Real - time update: ${data.updateMessage} `;
-            break;
+            case "COMPLAINT_SUBMITTED":
+                subject = "New Complaint Submitted";
+                message = `Dear Admin,  
+    
+    A new complaint has been submitted by ${data.userName}. Please review and take the necessary action.  
+    
+    Best regards,  
+    Gurukul Team`;
+                break;
 
-        default:
-            message = "Unknown notification type.";
-    }
+
+            case "COMPLAINT_STATUS_UPDATE":
+                subject = "Complaint Status Update";
+                message = `Dear ${data.userName},  
+    
+    We would like to inform you that the status of your complaint has been updated:  
+    
+    📌 *Current Status:* ${data.status}  
+    
+    If you have any further concerns or need additional assistance, please feel free to contact us.  
+    
+    Best regards,  
+    Gurukul Team`;
+                break;
+
+            case "REALTIME_UPDATE":
+                subject = "Important Update from Gurukul";
+                message = `Dear User,  
+    
+    We have an important update for you:  
+    
+    📌 ${data.updateMessage}  
+    
+    For more details, please log in to your Gurukul account or contact our support team if you have any questions.  
+    
+    Best regards,  
+    Gurukul Team`;
+                break;
+
+            default:
+                subject = "Notification from Gurukul";
+                message = "You have received an important update.";
+        }
 
     // Sending notifications based on the method
     if (method === "email") {

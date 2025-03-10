@@ -147,7 +147,7 @@ const initializeSocket = (server) => {
                 message: "Fetched Pending Request SuccessFully",
                 pendingRequests
             })
-            //PENDING REQUEST FETCH HO RKHI H AB AAGE KA DEKH INHE ADMIN KE PASS KAISE SHOW KRANA H
+
         });
 
 
@@ -156,7 +156,6 @@ const initializeSocket = (server) => {
             try {
                 const tutor = await Tutor.findOne({ userId: tutorId });
 
-                // Fix: Correct the condition to properly check tutor existence
                 if (!tutor || !tutor.isVerified) {
                     return socket.emit("error", { message: "Tutor is not verified" });
                 }
@@ -200,6 +199,41 @@ const initializeSocket = (server) => {
                     tutorUpdate: updatedTutor.assignedParents,
                     message: "Tutor assigned successfully!",
                 });
+
+
+
+                //NOTIFICATION FOR BOTH PARENT AND TUTOR
+                await updatedParent.populate("userId")
+                await tutor.populate("userId")
+
+
+                // Extract necessary details for notifications
+                const parentEmail = updatedParent.userId.email;
+                const tutorEmail = tutor.userId.email;
+
+                const notificationDataForParent = {
+                    parentName: updatedParent.userId.firstName,
+                    tutorName: tutor.userId.firstName + tutor.userId.lastName,
+                    tutorPhone: tutor.userId.phone,
+                    tutorEmail,
+                    locality: updatedParent.userId.address.city,
+                    email: parentEmail
+                };
+
+
+                const notificationDataForTutor = {
+                    tutorName: tutor.userId.firstName,
+                    parentName: updatedParent.userId.firstName,
+                    parentPhone: updatedParent.userId.phone,
+                    subject: updatedParent.tutorAssigned.subject,
+                    locality: updatedParent.userId.address.city,
+                    email: tutorEmail
+                };
+
+                // Send email notifications
+                await sendNotification("TUTOR_ASSIGNED", notificationDataForParent, "email"); // Notify parent
+                await sendNotification("TUTOR_ASSIGNMENT_CONFIRMATION", notificationDataForTutor, "email"); // Notify tutor
+
 
             } catch (error) {
                 console.error("Assignment Error:", error);
