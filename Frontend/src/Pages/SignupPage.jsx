@@ -76,7 +76,7 @@ const SignupPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col md:flex-row overflow-hidden">
+    <div className="min-h-screen w-full flex flex-col md:flex-row overflow-x-hidden overflow-y-auto">
       {/* Left Side - Fixed Section */}
       <div className="md:w-1/2 w-full bg-orange-800 flex items-center justify-center text-white p-8 md:fixed md:h-screen md:left-0">
         <motion.div
@@ -91,15 +91,13 @@ const SignupPage = () => {
 
       {/* Right Side - Swipeable Form */}
       <motion.div
-        drag="x"
-        dragConstraints={{ left: -200, right: 200 }}
-        className="md:w-1/2 w-full flex items-center justify-center p-6 md:p-10 bg-gray-100 md:ml-auto"
+        className="md:w-1/2 w-full flex items-center touch-pan-y justify-center p-6 md:p-10 bg-gray-100 md:ml-auto"
       >
         <motion.div
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6 }}
-          className="w-full max-w-lg bg-white p-5 md:p-6 rounded-lg shadow-xl"
+          className="w-full max-w-lg bg-white p-5 md:p-6 rounded-lg overflow-hidden shadow-xl"
         >
           <h2 className="text-3xl font-bold text-orange-700 text-center">Welcome!</h2>
           <p className="text-gray-600 text-lg text-center md:mb-4">It’s really nice to see you</p>

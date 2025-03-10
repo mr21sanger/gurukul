@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import {useUserReducer} from "../Reducers/UserReducer"
+import { useUserReducer } from "../Reducers/UserReducer"
 
 const AddSubjectBlock = ({ subjects, setSubjects, userId }) => {
     const [addingSubject, setAddingSubject] = useState(false);
     const [newSubject, setNewSubject] = useState("");
-    const {addOrEdit} = useUserReducer()
+    const { addOrEdit, removeItem } = useUserReducer()
 
     // Capitalize first letter of each word
     const capitalizeWords = (text) => {
@@ -33,10 +33,23 @@ const AddSubjectBlock = ({ subjects, setSubjects, userId }) => {
 
     };
 
+    const handleRemoveSubject = async (index) => {
+        const subjectToRemove = subjects[index];
 
-    const handleRemoveSubject = (index) => {
-        const updatedSubjects = subjects.filter((_, i) => i !== index);
-        setSubjects(updatedSubjects);
+        if (!subjectToRemove) return; 
+
+        const data = {
+            userId,
+            type: "subject",
+            value: subjectToRemove
+        };
+
+        try {
+            await removeItem(data); 
+            setSubjects((prevSubjects) => prevSubjects.filter((_, i) => i !== index)); // ✅ Update state correctly
+        } catch (error) {
+            console.error("Error removing subject:", error);
+        }
     };
 
     return (

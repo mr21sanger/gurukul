@@ -33,7 +33,7 @@ const Footer = () => {
                                 <Phone size={18} /> +919717018219 (Mon-Sat 9am-6pm IST)
                             </p>
                             <p className="flex items-center justify-center md:justify-start gap-2">
-                                <Mail size={18} /> info@teachme.com
+                                <Mail size={18} /> gurukulorganisation.com
                             </p>
                             <p className="flex items-center justify-center md:justify-start gap-2">
                                 <MessageCircle size={18} /> WhatsApp: +919717018219

@@ -21,10 +21,8 @@ const ResetPassword = () => {
             setLocalError("Passwords do not match.");
             return;
         }
-
         const response = await resetPassword({ password, token });
-
-        if (response?.status) {
+        if (response) {
             setMessage("Password has been reset successfully!");
         } else {
             setLocalError(response?.message || "Failed to reset password.");
@@ -34,9 +32,9 @@ const ResetPassword = () => {
     return (
         <div className="relative flex justify-center items-center min-h-screen bg-gray-100 px-6">
             {/* Logo at Top-Left */}
-            <img 
-                src="/logo.png" 
-                alt="Logo" 
+            <img
+                src="/logo.png"
+                alt="Logo"
                 className="absolute top-8 md:left-16 w-40 h-auto"
             />
 
@@ -71,11 +69,10 @@ const ResetPassword = () => {
                     {/* Submit Button */}
                     <button
                         type="submit"
-                        className={`w-full p-3 rounded-lg text-white font-semibold text-lg transition-all ${
-                            loading
+                        className={`w-full p-3 rounded-lg text-white font-semibold text-lg transition-all ${loading
                                 ? "bg-gray-400 cursor-not-allowed"
                                 : "bg-orange-500 hover:bg-orange-600 shadow-md"
-                        }`}
+                            }`}
                         disabled={loading}
                     >
                         {loading ? "Resetting..." : "Reset Password"}

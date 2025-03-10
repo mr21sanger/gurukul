@@ -6,7 +6,7 @@ import {
 } from "react-icons/fi";
 import { useUserReducer } from "../../Reducers/UserReducer";
 import HireTutorModal from "../../Components/HireTutorModal";
-import Error from "../../Components/Error";
+import Error from "../Error";
 import ComplaintModal from "../../Components/ComplaintModal";
 import { Alert, AlertTitle } from "@mui/material";
 import EditProfileModal from "../../Components/EditProfileModal";

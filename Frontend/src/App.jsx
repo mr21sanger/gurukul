@@ -14,6 +14,7 @@ import TutorDash from "./Pages/Parents/TutorDash";
 import VerificationPage from "./Pages/VeriFicationPage";
 import AdminDash from "./Pages/Admin/AdminDash";
 import ResetPassword from "./Components/ResetPassword";
+import Error from "./Pages/Error";
 
 function App() {
   const location = useLocation();
@@ -21,8 +22,10 @@ function App() {
   // Hide Navbar & Footer for specific routes
   const hideLayout = [
     "/get-started/signup",
+    "/get-started/login",
     "/reset-password",
-    "/admin-dash"
+    "/admin-dash",
+    "*"
   ].includes(location.pathname) || location.pathname.startsWith("/verification/");
 
   return (
@@ -41,6 +44,7 @@ function App() {
           <Route path="/admin-dash" element={<AdminDash />} />
           <Route path="/verification/:id" element={<VerificationPage />} />
           <Route path="/reset-password" element={<ResetPassword />} />
+          <Route path="*" element={<Error />} />
         </Routes>
       </Container>
       {!hideLayout && <Footer />}

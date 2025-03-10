@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import {useUserReducer} from "../Reducers/UserReducer"
+import { useUserReducer } from "../Reducers/UserReducer"
 
 const WeekendScheduleBlock = ({ schedule, setSchedule, userId }) => {
     const [addingSlot, setAddingSlot] = useState(false);
@@ -10,12 +10,13 @@ const WeekendScheduleBlock = ({ schedule, setSchedule, userId }) => {
     const daysOfWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
     const timePreferences = ["Morning", "Afternoon", "Evening", "Anytime"];
 
-    const { addOrEdit } = useUserReducer()
+    const { addOrEdit, removeItem } = useUserReducer()
 
     const handleAddSlot = () => {
         if (selectedDay) {
-            const newSlot = `${selectedDay} - ${selectedTime}`;
-            setSchedule([...schedule, newSlot]);
+            const newSlot = { day: selectedDay, time: selectedTime };
+            setSchedule((prevSchedule) => [...prevSchedule, newSlot]);
+
             const data = {
                 userId,
                 type: "schedule",
@@ -23,17 +24,34 @@ const WeekendScheduleBlock = ({ schedule, setSchedule, userId }) => {
                 value: selectedDay
             }
             addOrEdit(data)
-
             setSelectedDay("");
             setSelectedTime("Anytime"); // Reset to default
             setAddingSlot(false);
         }
     };
 
-    const handleRemoveSlot = (index) => {
-        const updatedSchedule = schedule.filter((_, i) => i !== index);
-        setSchedule(updatedSchedule);
+    console.log(schedule)
+
+    const handleRemoveSlot = async (index) => {
+        const slotToRemove = schedule[index]; // ✅ Get correct schedule slot
+
+        if (!slotToRemove) return; // ✅ Prevent errors if index is invalid
+
+        const data = {
+            userId,
+            type: "schedule",
+            value: slotToRemove.day, // ✅ Use correct day
+            timePreference: slotToRemove.time // ✅ Use correct time
+        };
+
+        try {
+            await removeItem(data); // ✅ Wait for successful API response
+            setSchedule((prevSchedule) => prevSchedule.filter((_, i) => i !== index)); // ✅ Update state correctly
+        } catch (error) {
+            console.error("Error removing schedule:", error);
+        }
     };
+
 
     return (
         <div className="bg-orange-50 p-5 rounded-lg border mb-4 shadow">
@@ -64,7 +82,7 @@ const WeekendScheduleBlock = ({ schedule, setSchedule, userId }) => {
                                 exit={{ scale: 0.8, opacity: 0 }}
                                 transition={{ duration: 0.2 }}
                             >
-                                {slot?.day +  " - " +  slot?.time}
+                                {slot.day + " - " + slot.time}
                                 <button
                                     onClick={() => handleRemoveSlot(index)}
                                     className="text-white hover:text-gray-200 transition"

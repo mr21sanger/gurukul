@@ -124,6 +124,36 @@ export const UserProvider = ({ children }) => {
         }
     };
 
+    //REMOVE DATA FUNCTION
+    const removeItem = async (data) => {
+        const token = localStorage.getItem("token");
+        if (token) {
+            try {
+                const res = await axios.post(`${baseUrl}/removeItem`, data, {
+                    headers: { Authorization: `Bearer ${token}` }
+                });
+                let updatedUser = state.user;
+                if (res && data.type === "subject") {
+                    updatedUser = { ...state.user, subjects: res.data.subjects };
+                } else if (res && data.type === "schedule") {
+                    updatedUser = { ...state.user, schedules: res.data.schedules };
+                } else if (res && data.type === "experience") {
+                    updatedUser = { ...state.user, experience: res.data.experience };
+                } else if (res && data.type === "qualification") {
+                    updatedUser = { ...state.user, qualifications: res.data.qualifications };
+                }
+
+                localStorage.setItem("user", JSON.stringify(updatedUser));
+                dispatch({ type: "Set_User", payload: updatedUser });
+
+            } catch (error) {
+                console.log(error)
+                dispatch({ type: "Error", payload: error?.response?.data?.error });
+            }
+        }
+    };
+
+
     // LOGIN FUNCTION
     const login = async (data) => {
         try {
@@ -312,7 +342,7 @@ export const UserProvider = ({ children }) => {
     }
 
     return (
-        <UserContext.Provider value={{ ...state, changePassword, resetPassword, forgetPassword, editProfile, login, postComplaint, addOrEdit, uploadDocuments, userSignUp, postTutorRequest, logout }}>
+        <UserContext.Provider value={{ ...state, removeItem, changePassword, resetPassword, forgetPassword, editProfile, login, postComplaint, addOrEdit, uploadDocuments, userSignUp, postTutorRequest, logout }}>
             {children}
         </UserContext.Provider>
     );

@@ -8,6 +8,7 @@ import AddExperienceBlock from "../../Components/AddExperienceBlock";
 import AddQualificationBlock from "../../Components/AddQualification";
 import EditProfileModal from "../../Components/EditProfileModal";
 import ChangePasswordModal from "../../Components/ChangePasswordModal";
+import Error from "../Error";
 
 const TutorDashboard = () => {
     const [verificationModal, setVerficationModal] = useState(false);
@@ -20,8 +21,9 @@ const TutorDashboard = () => {
     const [editProfileModal, setEditProfileModal] = useState(false);
     const [editPasswordModal, setEditPassWordModal] = useState(false);
 
-
-
+    if (user?.userId?.role !== "Instructor") {
+        return <Error />;
+    }
 
     return (
         <div className="container mx-auto p-6 min-h-screen bg-orange-100 mt-4">

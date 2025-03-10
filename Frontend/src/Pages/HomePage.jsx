@@ -87,7 +87,7 @@ const HomePage = () => {
                         </motion.p>
 
                         {/* Buttons */}
-                        <div className="flex justify-center md:justify-start gap-4 sm:gap-6 mt-3">
+                        <div className="flex justify-center md:justify-start gap-4 sm:gap-6 mt-3 z-50">
                             <motion.button
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
@@ -125,7 +125,7 @@ const HomePage = () => {
             <motion.div
 
                 transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute bottom-[-70px] left-0 w-full z-10 hidden sm:block"
+                className="absolute bottom-[-95px] left-0 w-full z-10 hidden sm:block"
             >
 
                 <svg className="w-full h-full  " viewBox="0 0 1440 320" xmlns="http://www.w3.org/2000/svg">

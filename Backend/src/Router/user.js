@@ -418,6 +418,88 @@ router.post("/addOrEdit", verifyToken, async (req, res) => {
 })
 
 
+// REMOVE DATA FROM THE SCHEMA
+router.post("/removeItem", verifyToken, async (req, res) => {
+    try {
+        const { userId, type, value, timePreference, years, organization, qualification } = req.body;
+
+        if (!userId) {
+            return res.status(400).json({ error: "User ID is required" });
+        }
+
+        const capitalizeWords = (text) => {
+            return text
+                .trim()
+                .split(" ")
+                .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+                .join(" ");
+        };
+
+        let formattedValue = value && capitalizeWords(value.trim());
+        const user = await Tutor.findOne({ userId });
+
+        if (!user) {
+            return res.status(404).json({ error: "User not found" });
+        }
+
+        switch (type) {
+            case "subject":
+                // ✅ Remove subject
+                user.subjects = user.subjects.filter((subject) => subject !== formattedValue);
+                await user.save();
+                return res.status(200).json({ message: "Subject removed successfully", subjects: user.subjects });
+
+            case "schedule":
+                if (!timePreference) {
+                    return res.status(400).json({ error: "Time preference is required for schedule removal" });
+                }
+
+                let formattedTime = capitalizeWords(timePreference);
+
+                user.schedules = user.schedules.filter((s) => !(s.day === formattedValue && s.time === formattedTime));
+
+
+                await user.save();
+                return res.status(200).json({ message: "Schedule removed successfully", schedules: user.schedules });
+
+            case "experience":
+                if (!years || !organization) {
+                    return res.status(400).json({ error: "Years and Organization are required for experience removal" });
+                }
+
+                let formattedOrganization = capitalizeWords(organization.trim());
+                // ✅ Remove experience based on years and organization
+                user.experience = user.experience.filter((exp) => !(exp.years === years && exp.organization === formattedOrganization));
+                await user.save();
+                return res.status(200).json({ message: "Experience removed successfully", experience: user.experience });
+
+            case "qualification":
+                if (!qualification) {
+                    return res.status(400).json({ error: "Qualification details are required for removal" });
+                }
+
+                let { degree, institution } = qualification;
+
+                degree = capitalizeWords(degree);
+                institution = capitalizeWords(institution);
+
+                // ✅ Remove qualification based on degree and institution
+                user.qualifications = user.qualifications.filter((q) => !(q.degree === degree && q.institution === institution));
+                await user.save();
+                return res.status(200).json({ message: "Qualification removed successfully", qualifications: user.qualifications });
+
+            default:
+                return res.status(400).json({ error: "Invalid type provided" });
+        }
+
+    } catch (error) {
+        console.error("Error removing item:", error);
+        return res.status(500).json({ error: "Server error" });
+    }
+});
+
+
+
 //LOGIN CASE
 
 router.post("/login", async (req, res) => {
