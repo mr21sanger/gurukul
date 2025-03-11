@@ -25,7 +25,6 @@ const ChangePasswordModal = ({ isOpen, onClose, user }) => {
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
-
         if (e.target.name === "confirmPassword") {
             setErrors((prev) => ({
                 ...prev,
@@ -58,11 +57,16 @@ const ChangePasswordModal = ({ isOpen, onClose, user }) => {
         }
     };
 
+
+    const handleOkButton = () => {
+        setForgotSuccess(false)
+        onClose()
+    }
+
     // Forgot password handler
     const handleForgotPassword = async () => {
         if (user?.email) {
             const res = await forgetPassword(user.email);
-
             if (res?.status) {
                 // Mask part of the email (e.g., "te****@gmail.com")
                 const masked = user.email.replace(/(.{2})(.*)(?=@)/, (match, first, middle) =>
@@ -170,7 +174,7 @@ const ChangePasswordModal = ({ isOpen, onClose, user }) => {
                                         onClick={handleSubmit}
                                         disabled={loading}
                                     >
-                                        {loading ? "Saving..." : "Change Password"}
+                                        {loading ? "loading..." : "Change Password"}
                                     </button>
                                 </div>
                             </>
@@ -199,7 +203,7 @@ const ChangePasswordModal = ({ isOpen, onClose, user }) => {
                         <p className="font-semibold text-gray-800">{maskedEmail}</p>
                         <button
                             className="mt-4 px-5 py-2 bg-orange-500 text-white rounded-md hover:bg-orange-600 transition"
-                            onClick={() => setForgotSuccess(false)}
+                            onClick={handleOkButton}
                         >
                             OK
                         </button>

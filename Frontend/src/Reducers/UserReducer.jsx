@@ -9,7 +9,7 @@ const UserContext = createContext();
 const initialValue = {
     loading: false,
     error: "",
-    user: JSON.parse(localStorage.getItem("user")) || null,
+    user: localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : null,
     token: localStorage.getItem("token") || null,
 };
 
@@ -105,12 +105,10 @@ export const UserProvider = ({ children }) => {
                 const res = await axios.post(`${baseUrl}/addOrEdit`, data, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
-                console.log(data.type, res)
                 let updatedUser = state.user;
                 if (res && data.type === "subject") {
                     updatedUser = { ...state.user, subjects: res.data.subjects };
                 } else if (res && data.type === "schedule") {
-                    console.log("ih")
                     updatedUser = { ...state.user, schedules: res.data.schedules };
                 } else if (res && data.type === "experience") {
                     updatedUser = { ...state.user, experience: res.data.experience };
@@ -150,7 +148,6 @@ export const UserProvider = ({ children }) => {
                 dispatch({ type: "Set_User", payload: updatedUser });
 
             } catch (error) {
-                console.log(error)
                 dispatch({ type: "Error", payload: error?.response?.data?.error });
             }
         }
@@ -275,7 +272,6 @@ export const UserProvider = ({ children }) => {
 
         // SOCKET EVENTS
         socket.on("verificationUpdate", (data) => {
-            console.log(data)
             if (state.user && state.user.userId._id === data.userId) {
                 const updatedUser = { ...state.user, isVerified: data.isVerified, verificationStatus: data.verificationStatus };
                 localStorage.setItem("user", JSON.stringify(updatedUser));
@@ -346,8 +342,34 @@ export const UserProvider = ({ children }) => {
         }
     }
 
+    const sendOtp = async (email) => {
+        try {
+            dispatch({ type: "Loading" })
+            const res = await axios.post(baseUrl + "/verify/send-otp", { email })
+            if (res.data.status) {
+                dispatch({ type: "SUCCESS" })
+                return true
+            }
+        } catch (error) {
+            dispatch({ type: "Error", payload: error.response.data.message })
+        }
+    }
+
+    const verifyOtp = async (data) => {
+        try {
+            dispatch({ type: "Loading" })
+            const res = await axios.post(baseUrl + "/verify/verify-otp", data)
+            if (res.data.status) {
+                dispatch({ type: "SUCCESS" })
+                return true
+            }
+        } catch (error) {
+            dispatch({ type: "Error", payload: error.response.data.message })
+        }
+    }
+
     return (
-        <UserContext.Provider value={{ ...state, removeItem, changePassword, resetPassword, forgetPassword, editProfile, login, postComplaint, addOrEdit, uploadDocuments, userSignUp, postTutorRequest, logout }}>
+        <UserContext.Provider value={{ ...state, removeItem,sendOtp, verifyOtp, changePassword, resetPassword, forgetPassword, editProfile, login, postComplaint, addOrEdit, uploadDocuments, userSignUp, postTutorRequest, logout }}>
             {children}
         </UserContext.Provider>
     );

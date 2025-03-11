@@ -30,7 +30,6 @@ const WeekendScheduleBlock = ({ schedule, setSchedule, userId }) => {
         }
     };
 
-    console.log(schedule)
 
     const handleRemoveSlot = async (index) => {
         const slotToRemove = schedule[index]; // ✅ Get correct schedule slot

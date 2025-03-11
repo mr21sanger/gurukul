@@ -24,8 +24,13 @@ const SignupPage = () => {
       country: "",
     },
   });
+  const [otp, setOtp] = useState(""); // State for OTP input
+  const [isOtpSent, setIsOtpSent] = useState(false); // State to track if OTP is sent
+  const [isOtpVerified, setIsOtpVerified] = useState(false); // State to track OTP verification
 
-  const { userSignUp, loading, error } = useUserReducer();
+  const [otpMessage, setOtpMessage] = useState("")
+
+  const { userSignUp, loading, error, sendOtp, verifyOtp } = useUserReducer();
 
   // Handle input change
   const handleChange = (e) => {
@@ -63,15 +68,36 @@ const SignupPage = () => {
   };
 
   // Handle form submission
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async (email) => {
     if (!validateForm()) return;
-
-    const status = await userSignUp(formData);
+    // Send OTP to the user's email
+    const status = await sendOtp(email);
     if (status) {
-      navigate(formData.role === "Instructor" ? "/tutor-dash" : "/parent-dash");
+      setIsOtpSent(true); // Show OTP input form
     } else {
-      setApiError(error);
+      setApiError(error || "Unexpected Error Occured");
+    }
+  };
+
+  // Handle OTP verification
+  const handleOtpVerification = async () => {
+    const status = await verifyOtp({ email: formData?.email, otp });
+    if (status) {
+      setIsOtpVerified(true);
+      setOtpMessage("Otp Verified Successfully. Redirecting to dashboard...")
+
+      // Add a 3-second loading pause for smooth transition
+      setTimeout(() => {
+        // Proceed with user signup
+        const signupStatus = userSignUp(formData);
+        if (signupStatus) {
+          navigate(formData.role === "Instructor" ? "/tutor-dash" : "/parent-dash");
+        } else {
+          setApiError(error || "Unexpected Error Occured");
+        }
+      }, 3000); // 3-second delay
+    } else {
+      setApiError("Invalid OTP. Please try again.");
     }
   };
 
@@ -109,45 +135,71 @@ const SignupPage = () => {
             </Link>
           </p>
 
-          <form onSubmit={handleSubmit} className="space-y-4">
-            {/* Name Fields */}
-            <div className="flex flex-col md:flex-row gap-4">
-              <input name="firstName" value={formData.firstName} onChange={handleChange} className="input-field" placeholder="First name" />
-              <input name="lastName" value={formData.lastName} onChange={handleChange} className="input-field" placeholder="Last name" />
+          {!isOtpSent ? (
+            // Initial Signup Form
+            <div className="space-y-4">
+              {/* Name Fields */}
+              <div className="flex flex-col md:flex-row gap-4">
+                <input name="firstName" value={formData.firstName} onChange={handleChange} className="input-field" placeholder="First name" />
+                <input name="lastName" value={formData.lastName} onChange={handleChange} className="input-field" placeholder="Last name" />
+              </div>
+
+              {/* Phone & Email */}
+              <input name="phone" type="tel" value={formData.phone} onChange={handleChange} className="input-field" placeholder="Phone number" />
+              <input name="email" type="email" value={formData.email} onChange={handleChange} className="input-field" placeholder="Enter your email" />
+
+              {/* Password Field */}
+              <div className="relative">
+                <input name="password" type={showPassword ? "text" : "password"} value={formData.password} onChange={handleChange} className="input-field pr-12" placeholder="Enter password" />
+                <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-4 top-3 text-gray-600">
+                  {showPassword ? <EyeOffIcon size={20} /> : <EyeIcon size={20} />}
+                </button>
+              </div>
+
+              {/* Address Fields */}
+              <input name="address.street" value={formData.address.street} onChange={handleChange} className="input-field" placeholder="Street Address" />
+              <input name="address.city" value={formData.address.city} onChange={handleChange} className="input-field" placeholder="City" />
+              <input name="address.state" value={formData.address.state} onChange={handleChange} className="input-field" placeholder="State" />
+              <input name="address.zipCode" value={formData.address.zipCode} onChange={handleChange} className="input-field" placeholder="Zip Code" />
+              <input name="address.country" value={formData.address.country} onChange={handleChange} className="input-field" placeholder="Country" />
+
+              {/* Role Selection (Dropdown) */}
+              <select name="role" value={formData.role} onChange={handleChange} className="input-field" required>
+                <option value="">Select Role</option>
+                <option value="Instructor">Instructor / Tutor</option>
+                <option value="Student">Student / Parent</option>
+              </select>
+
+              {apiError && <p className="text-red-500 text-center mb-3">{apiError}</p>}
+
+              <motion.button onClick={() => handleSubmit(formData.email)} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} disabled={loading} className="w-full bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 rounded-lg">
+                {loading ? "Sending OTP..." : "Send OTP →"}
+              </motion.button>
             </div>
+          ) : (
+            // OTP Verification Form
+            <div className="space-y-4">
+              <p className="text-center text-gray-600">We’ve sent an OTP to your email. Please enter it below.</p>
+              <input
+                type="text"
+                value={otp}
+                onChange={(e) => setOtp(e.target.value)}
+                className="input-field"
+                placeholder="Enter OTP"
+                required
+              />
 
-            {/* Phone & Email */}
-            <input name="phone" type="tel" value={formData.phone} onChange={handleChange} className="input-field" placeholder="Phone number" />
-            <input name="email" type="email" value={formData.email} onChange={handleChange} className="input-field" placeholder="Enter your email" />
+              {otpMessage && (
+                <p className={`text-center mb-3 ${isOtpVerified ? "text-green-500" : "text-red-500"}`}>
+                  {otpMessage}
+                </p>)}
 
-            {/* Password Field */}
-            <div className="relative">
-              <input name="password" type={showPassword ? "text" : "password"} value={formData.password} onChange={handleChange} className="input-field pr-12" placeholder="Enter password" />
-              <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-4 top-3 text-gray-600">
-                {showPassword ? <EyeOffIcon size={20} /> : <EyeIcon size={20} />}
-              </button>
+              {apiError && <p className="text-red-500 text-center mb-3">{apiError}</p>}
+              <motion.button onClick={handleOtpVerification} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} disabled={loading} className="w-full bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 rounded-lg">
+                {loading ? "Verifying OTP..." : "Verify OTP →"}
+              </motion.button>
             </div>
-
-            {/* Address Fields */}
-            <input name="address.street" value={formData.address.street} onChange={handleChange} className="input-field" placeholder="Street Address" />
-            <input name="address.city" value={formData.address.city} onChange={handleChange} className="input-field" placeholder="City" />
-            <input name="address.state" value={formData.address.state} onChange={handleChange} className="input-field" placeholder="State" />
-            <input name="address.zipCode" value={formData.address.zipCode} onChange={handleChange} className="input-field" placeholder="Zip Code" />
-            <input name="address.country" value={formData.address.country} onChange={handleChange} className="input-field" placeholder="Country" />
-
-            {/* Role Selection (Dropdown) */}
-            <select name="role" value={formData.role} onChange={handleChange} className="input-field" required>
-              <option value="">Select Role</option>
-              <option value="Instructor">Instructor / Tutor</option>
-              <option value="Student">Student / Parent</option>
-            </select>
-
-            {apiError && <p className="text-red-500 text-center mb-3">{apiError}</p>}
-
-            <motion.button type="submit" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} disabled={loading} className="w-full bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 rounded-lg">
-              {loading ? "Signing Up..." : "Join now →"}
-            </motion.button>
-          </form>
+          )}
         </motion.div>
       </motion.div>
     </div>

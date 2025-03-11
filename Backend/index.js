@@ -3,6 +3,7 @@ const http = require("http");
 const cors = require("cors");
 const userRoutes = require("./src/Router/user");
 const complaintRoutes = require("./src/Router/complaint")
+const verificationRoutes = require("./src/Router/verificationRouter");
 const { initializeSocket } = require("./src/Router/adminRoute"); // Import socket file
 require("./src/Config/DBConfig");
 const path = require("path")
@@ -12,8 +13,6 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const _dirName = path.resolve()
-
-console.log(process.env.url)
 
 // Middleware
 app.use(express.json());
@@ -29,6 +28,7 @@ app.use(
 // Routes
 app.use("/user", userRoutes);
 app.use("/user/complaint", complaintRoutes);
+app.use("/user/verify", verificationRoutes);
 
 app.use(express.static(path.join(_dirName, "/Frontend/dist")))
 app.get("*", (req, res) => {

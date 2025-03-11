@@ -28,7 +28,7 @@ const uploadCloudinary = async (localPath) => {
     return res;
   } catch (error) {
     fs.unlinkSync(localPath);
-    console.log(error,"hii");
+    console.log(error)
   }
 };
 module.exports = uploadCloudinary;

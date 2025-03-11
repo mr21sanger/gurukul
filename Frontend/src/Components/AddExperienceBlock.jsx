@@ -29,7 +29,6 @@ const AddExperience = ({ experience, setExperience, userId }) => {
     // ✅ Function to Remove Experience
     const handleRemoveExperience = async (index) => {
         const expToRemove = experience[index]; // ✅ Get correct experience
-        console.log("hii")
         if (!expToRemove) return;
 
         const data = {

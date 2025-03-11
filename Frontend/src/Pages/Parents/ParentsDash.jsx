@@ -254,7 +254,7 @@ const ParentDash = () => {
       <HireTutorModal isOpen={postRequestModal} parentId={user?._id} onClose={() => setPostRequestModal(false)} />
 
       <EditProfileModal isOpen={editProfileModal} onClose={() => setEditProfileModal(false)} user={user?.userId} />
-      <ChangePasswordModal isOpen={editPasswordModal} onClose={() => setEditPassWordModal(false)} />
+      <ChangePasswordModal isOpen={editPasswordModal} onClose={() => setEditPassWordModal(false)} user={user?.userId} />
 
     </div>
   );

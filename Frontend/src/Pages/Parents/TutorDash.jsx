@@ -25,9 +25,6 @@ const TutorDashboard = () => {
         return <Error />;
     }
 
-
-    console.log(user?.assignedParents)
-
     return (
         <div className="container mx-auto p-6 min-h-screen bg-orange-100 mt-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10">

@@ -17,13 +17,26 @@ const transporter = nodemailer.createTransport({
 
 const sendNotification = async (type, data, method) => {
     let message = "";
-    let sub = ""
+    let subject = ""
 
 
-        switch (type) {
-            case "TUTOR_VERIFICATION_APPROVED":
-                subject = "Verification Approved - Welcome to Gurukul!";
-                message = `Dear ${data?.firstName},
+    switch (type) {
+
+        case "OTP_VERIFICATION":
+            subject = "Your Gurukul OTP Code";
+            message = `Dear User,  
+                    
+        Your OTP for verification is: **${data.otp}**  
+        
+        This OTP is valid for **5 minutes**. Do not share it with anyone.  
+                    
+        Best regards,  
+        Gurukul Team`;
+            break
+
+        case "TUTOR_VERIFICATION_APPROVED":
+            subject = "Verification Approved - Welcome to Gurukul!";
+            message = `Dear ${data?.firstName},
     
     Congratulations! Your tutor verification has been successfully approved. You are now eligible to start tutoring on Gurukul.
     
@@ -33,13 +46,13 @@ const sendNotification = async (type, data, method) => {
     
     Best regards,  
     Gurukul Team`;
-                break;
+            break;
 
 
 
-            case "TUTOR_ASSIGNED":
-                subject = "A Tutor Has Been Assigned to Your Request";
-                message = `Dear ${data.parentName},  
+        case "TUTOR_ASSIGNED":
+            subject = "A Tutor Has Been Assigned to Your Request";
+            message = `Dear ${data.parentName},  
     
     We are pleased to inform you that a tutor has been assigned to your request. Below are the details:  
     
@@ -54,12 +67,12 @@ const sendNotification = async (type, data, method) => {
     
     Best regards,  
     Gurukul Team`;
-                break;
+            break;
 
 
-            case "TUTOR_ASSIGNMENT_CONFIRMATION":
-                subject = "New Student Assigned to You - Gurukul";
-                message = `Dear ${data.tutorName},  
+        case "TUTOR_ASSIGNMENT_CONFIRMATION":
+            subject = "New Student Assigned to You - Gurukul";
+            message = `Dear ${data.tutorName},  
     
     We are pleased to inform you that you have been assigned to a new student on Gurukul. Below are the details:  
     
@@ -74,13 +87,13 @@ const sendNotification = async (type, data, method) => {
     
     Best regards,  
     Gurukul Team`;
-                break;
+            break;
 
 
 
-            case "NEW_TUTOR_REQUEST":
-                subject = "New Tutoring Request Available";
-                message = `Hello, Experts!  
+        case "NEW_TUTOR_REQUEST":
+            subject = "New Tutoring Request Available";
+            message = `Hello, Experts!  
     
     A new tutoring request has been received. Below are the details:  
     
@@ -100,13 +113,13 @@ const sendNotification = async (type, data, method) => {
     Best regards,  
     Gurukul Team  
     🌐 www.gurukul.com`;
-                break;
+            break;
 
 
 
-            case "RESET_PASSWORD":
-                subject = "Password Reset Request - Gurukul";
-                message = `Dear User,  
+        case "RESET_PASSWORD":
+            subject = "Password Reset Request - Gurukul";
+            message = `Dear User,  
     
     We received a request to reset your password. To proceed, please click the link below:  
     
@@ -116,11 +129,11 @@ const sendNotification = async (type, data, method) => {
     
     Best regards,  
     Gurukul Team`;
-                break;
+            break;
 
-            case "NEW_TUTOR_SIGNUP":
-                subject = "New Tutor Signup Alert";
-                message = `Dear Admin,  
+        case "NEW_TUTOR_SIGNUP":
+            subject = "New Tutor Signup Alert";
+            message = `Dear Admin,  
     
     A new tutor has signed up on Gurukul:  
     
@@ -130,22 +143,22 @@ const sendNotification = async (type, data, method) => {
     
     Best regards,  
     Gurukul Team`;
-                break;
+            break;
 
-            case "COMPLAINT_SUBMITTED":
-                subject = "New Complaint Submitted";
-                message = `Dear Admin,  
+        case "COMPLAINT_SUBMITTED":
+            subject = "New Complaint Submitted";
+            message = `Dear Admin,  
     
     A new complaint has been submitted by ${data.userName}. Please review and take the necessary action.  
     
     Best regards,  
     Gurukul Team`;
-                break;
+            break;
 
 
-            case "COMPLAINT_STATUS_UPDATE":
-                subject = "Complaint Status Update";
-                message = `Dear ${data.userName},  
+        case "COMPLAINT_STATUS_UPDATE":
+            subject = "Complaint Status Update";
+            message = `Dear ${data.userName},  
     
     We would like to inform you that the status of your complaint has been updated:  
     
@@ -155,11 +168,11 @@ const sendNotification = async (type, data, method) => {
     
     Best regards,  
     Gurukul Team`;
-                break;
+            break;
 
-            case "REALTIME_UPDATE":
-                subject = "Important Update from Gurukul";
-                message = `Dear User,  
+        case "REALTIME_UPDATE":
+            subject = "Important Update from Gurukul";
+            message = `Dear User,  
     
     We have an important update for you:  
     
@@ -169,16 +182,16 @@ const sendNotification = async (type, data, method) => {
     
     Best regards,  
     Gurukul Team`;
-                break;
+            break;
 
-            default:
-                subject = "Notification from Gurukul";
-                message = "You have received an important update.";
-        }
+        default:
+            subject = "Notification from Gurukul";
+            message = "You have received an important update.";
+    }
 
     // Sending notifications based on the method
     if (method === "email") {
-        await sendEmailNotification(data.email, sub, message);
+        await sendEmailNotification(data.email, subject, message);
     } else if (method === "telegram") {
         await sendTelegramNotification(process.env.TELEGRAM_CHAT_ID, process.env.TELEGRAM_BOT_TOKEN, message);
     } else if (method === "in-app") {
