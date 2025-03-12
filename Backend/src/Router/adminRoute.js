@@ -211,22 +211,27 @@ const initializeSocket = (server) => {
                 const parentEmail = updatedParent.userId.email;
                 const tutorEmail = tutor.userId.email;
 
+                console.log(tutorEmail)
+
                 const notificationDataForParent = {
                     parentName: updatedParent.userId.firstName,
                     tutorName: tutor.userId.firstName + tutor.userId.lastName,
                     tutorPhone: tutor.userId.phone,
                     tutorEmail,
-                    locality: updatedParent.userId.address.city,
+                    locality: tutor.userId.address.city,
                     email: parentEmail
                 };
 
 
+
                 const notificationDataForTutor = {
                     tutorName: tutor.userId.firstName,
-                    parentName: updatedParent.userId.firstName,
+                    parentName: updatedParent.userId.firstName + updatedParent.userId.lastName,
                     parentPhone: updatedParent.userId.phone,
                     subject: updatedParent.tutorAssigned.subject,
                     locality: updatedParent.userId.address.city,
+                    parentEmail: updatedParent.userId.email,
+                    locality: updatedParent.userId.address.street + ", " + updatedParent.userId.address.city,
                     email: tutorEmail
                 };
 

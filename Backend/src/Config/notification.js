@@ -59,7 +59,7 @@ const sendNotification = async (type, data, method) => {
     👨‍🏫 *Tutor Name:* ${data.tutorName}  
     📧 *Email:* ${data.tutorEmail}  
     📞 *Phone:* ${data.tutorPhone}  
-    📍 *Address:* ${data.tutorAddress}  
+    📍 *Address:* ${data.locality}  
     
     Please contact your assigned tutor to coordinate the sessions and begin the learning process.  
     
@@ -79,7 +79,7 @@ const sendNotification = async (type, data, method) => {
     👩‍🎓 *Student Name:* ${data.parentName}  
     📧 *Email:* ${data.parentEmail}  
     📞 *Phone:* ${data.parentPhone}  
-    📍 *Address:* ${data.parentAddress}  
+    📍 *Address:* ${data.locality}  
     
     Kindly reach out to the student at your earliest convenience to discuss the session schedule and ensure a smooth learning experience.  
     

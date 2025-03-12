@@ -38,7 +38,7 @@ const HomePage = () => {
         },
 
         {
-            name: "Anubhav Singh", role: "Parent", location: "Delhi", image: "/images/parent1.png",
+            name: "Anubhav Singh", role: "Parent", location: "Delhi", image: "",
             review: "Finding a tutor was so easy and the quality of teaching is great. My child has improved significantly!"
         }
     ];
