@@ -181,7 +181,7 @@ const SignupPage = () => {
             <div className="space-y-4">
               <p className="text-center text-gray-600">We’ve sent an OTP to your email. Please enter it below.</p>
               <input
-                type="text"
+                type="number"
                 value={otp}
                 onChange={(e) => setOtp(e.target.value)}
                 className="input-field"

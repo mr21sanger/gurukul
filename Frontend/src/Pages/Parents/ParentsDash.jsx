@@ -76,7 +76,7 @@ const ParentDash = () => {
           </h2>
           <div className="flex flex-col sm:flex-row items-center mb-4">
             <img
-              src={details?.image || "public/default.png"}
+              src={details?.image || "/default.png"}
               alt="Profile"
               className="w-20 sm:w-24 h-20 sm:h-24 rounded-full border-2 border-orange-500 shadow-md"
             />
