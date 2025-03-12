@@ -36,7 +36,7 @@ const TutorDashboard = () => {
                     animate={{ opacity: 1, x: 0 }}
                 >
                     <div className="flex flex-col md:flex-row items-center gap-6 border-b pb-6 mb-6">
-                        <img src={userId?.profileImage || "/default-profile.png"}
+                        <img src={userId?.profileImage || "/public/default.png"}
                             alt="Profile"
                             className="w-24 h-24 rounded-full border-4 border-orange-400 shadow-lg"
                         />

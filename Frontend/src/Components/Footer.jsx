@@ -9,7 +9,7 @@ const Footer = () => {
                     {/* Left Section */}
                     <div>
                         <p className="text-lg font-medium">
-                            Stay connected with Gurukul for updates, tips, and exclusive offers. Join our community for educational resources and success stories—follow us today!
+                            Stay connected with Gurukul! Get the latest updates, expert tips, and exclusive offers. Join our thriving community for valuable educational resources, inspiring success stories, and more. Follow us today and be a part of the journey to excellence!
                         </p>
                         {/* Social Icons */}
                         <div className="flex justify-center md:justify-start gap-4 mt-4">
@@ -22,6 +22,9 @@ const Footer = () => {
                             <a href="#" className="bg-orange-500 p-3 rounded-full hover:bg-orange-600 transition">
                                 <Linkedin className="text-white" size={20} />
                             </a>
+                            <a href="#" className="bg-orange-500 p-3 rounded-full hover:bg-orange-600 transition">
+                                <MessageCircle className="text-white" size={20} /> {/* Instagram Placeholder */}
+                            </a>
                         </div>
                     </div>
 
@@ -30,13 +33,13 @@ const Footer = () => {
                         <h3 className="font-semibold text-lg">Have a question? Contact us</h3>
                         <div className="flex flex-col gap-2 mt-3 text-sm">
                             <p className="flex items-center justify-center md:justify-start gap-2">
-                                <Phone size={18} /> +919717018219 (Mon-Sat 9am-6pm IST)
+                                <Phone size={18} /> +919891061356 (Mon-Sat 9am-6pm IST)
                             </p>
                             <p className="flex items-center justify-center md:justify-start gap-2">
-                                <Mail size={18} /> gurukulorganisation.com
+                                <Mail size={18} /> gurukulorganisation@gmail.com
                             </p>
                             <p className="flex items-center justify-center md:justify-start gap-2">
-                                <MessageCircle size={18} /> WhatsApp: +919717018219
+                                <MessageCircle size={18} /> WhatsApp: +919891061356
                             </p>
                         </div>
                     </div>

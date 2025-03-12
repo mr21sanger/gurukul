@@ -28,12 +28,12 @@ const HomePage = () => {
 
     const testimonials = [
         {
-            name: "Sudha Jain", role: "Student", location: "South Delhi", image: "/images/student1.png",
+            name: "Sudha Jain", role: "Student", location: "South Delhi", image: "",
             review: "Perfect Tutor is the best platform for getting home tutors. The teachers are highly experienced and well-qualified."
         },
 
         {
-            name: "Vaibhav Gupta", role: "Student (X)", location: "Mumbai", image: "/images/student2.png",
+            name: "Vaibhav Gupta", role: "Student (X)", location: "Mumbai", image: "",
             review: "The teaching quality and content are excellent. I find it difficult to understand Maths, but my tutor makes it easy!"
         },
 
