@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useReducer } from "react";
 import { io } from "socket.io-client";
 
-const socket = io("https://gurukul-e6by.onrender.com"); // Connect to Socket.io server
+const socket = io("https://gurukul-learn.online/"); // Connect to Socket.io server
 
 const AdminContext = createContext();
 
