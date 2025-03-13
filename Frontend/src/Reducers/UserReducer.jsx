@@ -47,7 +47,7 @@ const reducer = (state, action) => {
 
 export const UserProvider = ({ children }) => {
     const [state, dispatch] = useReducer(reducer, initialValue);
-    const baseUrl = "https://gurukul-e6by.onrender.com/user";
+    const baseUrl = "https://gurukul-learn.online/user";
 
     // DASHBOARD DATA FUNCTION
     const dashboardAccess = async (email) => {
