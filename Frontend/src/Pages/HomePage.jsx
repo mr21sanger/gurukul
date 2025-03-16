@@ -64,7 +64,7 @@ const HomePage = () => {
 
     return (
         <>
-            <div className="relative top-26 md:top-24 w-full min-h-[85vh] mb-18 flex items-center justify-center text-white bg-gradient-to-b from-orange-200 to-orange-50 overflow-hidden px-6 md:pb-60 z-10 md:mb-44">
+            <div className="relative top-26 md:top-26 w-full min-h-[85vh] mb-18 flex items-center justify-center text-white bg-gradient-to-b from-orange-200 to-orange-50 overflow-hidden px-6 md:pb-60 z-10 md:mb-44">
                 <div className="max-w-7xl w-full flex flex-col md:flex-row items-center gap-6 px-4 sm:px-8 lg:px-12">
                     {/* Left Side - Text Content */}
                     <div className="md:w-1/2 text-center md:text-left">
@@ -146,7 +146,7 @@ const HomePage = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8 }}
                 viewport={{ once: true }}
-                className="relative z-10 px-6 max-w-7xl  mx-auto flex flex-col md:flex-row-reverse items-center justify-between gap-12 md:gap-24 py-16 min-h-[85vh]"
+                className="relative z-10 bg-orange-50 px-6 max-w-7xl  mx-auto flex flex-col md:flex-row-reverse items-center justify-between gap-12 md:gap-24 py-16 min-h-[85vh]"
             >
                 {/* Text Content */}
                 <div className="md:w-1/2 mt-12 text-center md:text-left">
