@@ -112,7 +112,7 @@ const sendNotification = async (type, data, method) => {
     
     Best regards,  
     Gurukul Team  
-    🌐 www.gurukul.com`;
+    🌐 https://gurukul-learn.online/`;
             break;
 
 

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ChevronDown, User, LogOut } from "lucide-react";
-import { useNavigate, useLocation, Navigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useUserReducer } from "../Reducers/UserReducer";
 
 const NavigationBar = () => {
