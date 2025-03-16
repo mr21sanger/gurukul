@@ -114,6 +114,7 @@ const HomePage = () => {
                         <img
                             src="/hero.png"
                             alt="Online Tutor"
+                            loading="lazy"
                             className="w-[90vw] sm:w-[75vw] md:w-[50vw] lg:w-[40vw] max-w-md"
                         />
                     </div>
@@ -162,6 +163,7 @@ const HomePage = () => {
                     <img
                         src="/6-removebg-preview.png"
                         alt="Tutoring session"
+                        loading="lazy"
                         className="w-full max-w-md md:max-w-lg rounded-lg"
                     />
                 </div>

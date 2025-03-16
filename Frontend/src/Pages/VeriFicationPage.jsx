@@ -78,6 +78,7 @@ const VerificationPage = () => {
           <img 
             src={aadhaarPreview} 
             alt="Aadhaar Preview" 
+            loading="lazy"
             className="w-24 h-24 object-cover rounded-lg mb-4 shadow-md mx-1" 
           />
         )}
@@ -94,6 +95,7 @@ const VerificationPage = () => {
           <img 
             src={selfiePreview} 
             alt="Selfie Preview" 
+            loading="lazy"
             className="w-24 h-24 object-cover rounded-lg mb-4 shadow-md mx-1" 
           />
         )}

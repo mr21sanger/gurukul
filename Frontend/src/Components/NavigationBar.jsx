@@ -78,6 +78,7 @@ const NavigationBar = () => {
                     initial={{ opacity: 0, x: -50 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.5 }}
+                    loading="lazy"
                     src="/logo.png"
                     className={`transition-all duration-500 ${isScrolled || activePage !== "Home" ? "w-30" : "w-44"}`}
                     alt="Logo"

@@ -55,6 +55,7 @@ const VerificationRequests = ({ handleVerification }) => {
                         <img
                           key={index}
                           src={url}
+                          loading="lazy"
                           alt="Verification"
                           className="h-14 w-14 rounded-md shadow-md border border-gray-300 hover:scale-110 transition-transform duration-200"
                         />

@@ -35,6 +35,7 @@ const ResetPassword = () => {
             <img
                 src="/logo.png"
                 alt="Logo"
+                loading="lazy"
                 className="absolute top-8 md:left-16 w-40 h-auto"
             />
 

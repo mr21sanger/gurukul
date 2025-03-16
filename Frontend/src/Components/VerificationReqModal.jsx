@@ -40,6 +40,7 @@ const VerificationReqModal = ({ isOpen, onClose, user, handleVerification }) => 
                 <img
                   key={index}
                   src={url}
+                  loading="lazy"
                   alt="Verification"
                   className="h-16 w-16 rounded-lg shadow-md border border-gray-300 hover:scale-110 transition-transform duration-200 cursor-pointer"
                   onClick={() => setSelectedImage(url)} // Open image preview
@@ -75,6 +76,8 @@ const VerificationReqModal = ({ isOpen, onClose, user, handleVerification }) => 
             <img
               src={selectedImage}
               alt="Preview"
+              loading="lazy"
+
               className="max-w-full max-h-[90vh] rounded-lg shadow-2xl border-2 border-white"
             />
             <button

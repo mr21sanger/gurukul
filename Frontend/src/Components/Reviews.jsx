@@ -3,7 +3,7 @@ import { Quote } from "lucide-react";
 
 const Reviews = ({ name, role, location, image, review }) => {
     return (
-        <motion.div 
+        <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -11,7 +11,8 @@ const Reviews = ({ name, role, location, image, review }) => {
             className="bg-white shadow-lg rounded-2xl p-6 max-w-lg relative"
         >
             <div className="flex items-center gap-4">
-                <img src={image || "/defUser.jpg"} alt={name} className="w-14 h-14 rounded-full border" />
+                <img src={image || "/defUser.jpg"} alt={name} className="w-14 h-14 rounded-full border" loading="lazy"
+                />
                 <div>
                     <h3 className="font-bold text-gray-900 text-lg">{name}</h3>
                     <p className="text-sm text-gray-600">{role}, {location}</p>
@@ -19,7 +20,7 @@ const Reviews = ({ name, role, location, image, review }) => {
             </div>
 
             <Quote className="text-orange-400 absolute top-6 right-6" size={24} />
-            
+
             <p className="mt-4 text-gray-800">{review}</p>
         </motion.div>
     );
