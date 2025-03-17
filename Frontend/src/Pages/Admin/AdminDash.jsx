@@ -21,8 +21,8 @@ function AdminDash() {
     const { totalUsersCount, verifyUser } = useAdmin()
 
     const [verificationRequests, setVerificationRequests] = useState([
-        { id: 1, name: "John Doe", email: "john@example.com", status: "Pending", documents: ["/images/doc1.png"] },
-        { id: 2, name: "Jane Smith", email: "jane@example.com", status: "Pending", documents: ["/images/doc2.png"] },
+        { id: 1, name: "John Doe", email: "john@example.com", status: "Pending", documents: ["/images/doc1.webp"] },
+        { id: 2, name: "Jane Smith", email: "jane@example.com", status: "Pending", documents: ["/images/doc2.webp"] },
     ]);
 
     const [complaints, setComplaints] = useState([

@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+Disallow: /admin-dash
+Disallow: /parent-dash
+Disallow: /tutor-dash
+Disallow: /verification/
+Disallow: /reset-password
+
+Sitemap: https://gurukul-learn.online/sitemap.xml

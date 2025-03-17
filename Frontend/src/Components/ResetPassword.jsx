@@ -33,7 +33,7 @@ const ResetPassword = () => {
         <div className="relative flex justify-center items-center min-h-screen bg-gray-100 px-6">
             {/* Logo at Top-Left */}
             <img
-                src="/logo.png"
+                src="/logo.webp"
                 alt="Logo"
                 loading="lazy"
                 className="absolute top-8 md:left-16 w-40 h-auto"
