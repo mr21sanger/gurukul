@@ -60,8 +60,6 @@ const HomePage = () => {
         }
     }
 
-
-
     return (
         <>
             <div className="relative top-26 md:top-26 w-full min-h-[85vh] mb-18 flex items-center justify-center text-white bg-gradient-to-b from-orange-200 to-orange-50 overflow-hidden px-6 md:pb-60 z-10 md:mb-44">
@@ -103,7 +101,7 @@ const HomePage = () => {
                                 whileTap={{ scale: 0.95 }}
                                 transition={{ duration: 0.2 }}
                                 onClick={() => handleHeroButtonClick("Instructor")}
-                                className="border-2 border-orange-500 text-orange-500 px-5 sm:px-6 py-3 rounded-lg font-semibold text-base sm:text-lg hover:bg-orange-500 hover:text-white transition-all"
+                                className="border-2 border-orange-500 text-orange-500 px-5 font-bold sm:px-6 py-3 rounded-lg text-base sm:text-lg hover:bg-orange-500 hover:text-white transition-all"
                             >
                                 Get Hired as a Tutor
                             </motion.button>
