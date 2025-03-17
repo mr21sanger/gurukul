@@ -64,7 +64,7 @@ const HomePage = () => {
 
     return (
         <>
-            <div className="relative top-26 md:top-26 w-full min-h-[85vh] mb-18 flex items-center justify-center text-white bg-gradient-to-b from-orange-200 to-orange-50 overflow-hidden px-6 md:pb-60 z-10 md:mb-44">
+            <div className="relative top-26 md:top-26 w-full min-h-[85vh] md:mt-5 mb-18 flex items-center justify-center text-white bg-gradient-to-b from-orange-200 to-orange-50 overflow-hidden px-6 md:pb-60 z-10 md:mb-44">
                 <div className="max-w-7xl w-full flex flex-col md:flex-row items-center gap-6 px-4 sm:px-8 lg:px-12">
                     {/* Left Side - Text Content */}
                     <div className="md:w-1/2 text-center md:text-left">
@@ -171,7 +171,7 @@ const HomePage = () => {
 
 
             {/* Why Choose Us */}
-            <div className="w-full py-16 flex justify-center items-center bg-gradient-to-b from-orange-200 to-orange-100 text-white px-6">
+            <div className="w-full py-16 flex justify-center items-center bg-gradient-to-b from-gray-200 to-gray-100 text-white px-6">
                 <div className="max-w-5xl text-center">
                     <h2 className="md:text-5xl text-3xl font-extrabold mb-8 text-orange-500">Why Choose Us?</h2>
                     <p className="text-xl text-gray-900 mb-12">Our platform connects students with expert tutors, ensuring personalized learning experiences that drive results.</p>
