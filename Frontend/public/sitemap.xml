@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+    <!-- Public Pages -->
+    <url>
+        <loc>https://gurukul-learn.online/</loc>
+        <priority>1.0</priority>
+    </url>
+    <url>
+        <loc>https://gurukul-learn.online/tutors</loc>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://gurukul-learn.online/About</loc>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://gurukul-learn.online/Contact</loc>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Authentication Pages -->
+    <url>
+        <loc>https://gurukul-learn.online/get-started/login</loc>
+        <priority>0.9</priority>
+    </url>
+    <url>
+        <loc>https://gurukul-learn.online/get-started/signup</loc>
+        <priority>0.9</priority>
+    </url>
+    <url>
+        <loc>https://gurukul-learn.online/reset-password</loc>
+        <priority>0.7</priority>
+    </url>
+
+    <!-- Dashboard Pages -->
+    <url>
+        <loc>https://gurukul-learn.online/parent-dash</loc>
+        <priority>0.9</priority>
+    </url>
+    <url>
+        <loc>https://gurukul-learn.online/tutor-dash</loc>
+        <priority>0.9</priority>
+    </url>
+    <url>
+        <loc>https://gurukul-learn.online/admin-dash</loc>
+        <priority>0.7</priority>
+    </url>
+
+    <!-- Verification (Dynamic URLs) -->
+    <url>
+        <loc>https://gurukul-learn.online/verification/{id}</loc>
+        <priority>0.6</priority>
+    </url>
+
+    <!-- 404 Error Page -->
+    <url>
+        <loc>https://gurukul-learn.online/error</loc>
+        <priority>0.3</priority>
+    </url>
+
+</urlset>
