@@ -36,16 +36,22 @@ const sendNotification = async (type, data, method) => {
 
         case "TUTOR_VERIFICATION_APPROVED":
             subject = "Verification Approved - Welcome to Gurukul!";
-            message = `Dear ${data?.firstName},
-    
-    Congratulations! Your tutor verification has been successfully approved. You are now eligible to start tutoring on Gurukul.
-    
-    We are excited to have you onboard and look forward to your valuable contributions in helping students excel.
-    
-    For any assistance, feel free to reach out to our support team.
-    
-    Best regards,  
-    Gurukul Team`;
+            message = `Dear ${data?.firstName},  
+            
+                Congratulations! Your tutor verification has been successfully approved. You are now an official tutor on Gurukul and eligible to start tutoring.  
+            
+                **Guidelines & Next Steps:** 
+                 
+                - **Tutor Assignments:** Please be patient as we match you with students based on their requirements. You will be notified when a suitable student is assigned to you.  
+                
+                - **Professional Conduct:** We expect all tutors to maintain professionalism, adhere to scheduled sessions, and provide quality education to students.
+
+                - **Support & Assistance:** If you have any questions or need help, our support team is always available to assist you.  
+            
+                We are thrilled to have you onboard and look forward to your valuable contributions in helping students excel.  
+            
+                Best regards,  
+                **Gurukul Team**`;
             break;
 
 
