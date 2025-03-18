@@ -82,7 +82,7 @@ const VerificationPage = () => {
             className="w-24 h-24 object-cover rounded-lg mb-4 shadow-md mx-1" 
           />
         )}
-        <label className="block text-gray-700 mb-2">Upload Aadhaar Card:</label>
+        <label className="block text-gray-700 mb-2">Upload National Id:</label>
         <input
           type="file"
           accept="image/*"

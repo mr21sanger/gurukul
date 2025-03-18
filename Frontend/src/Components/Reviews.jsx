@@ -11,7 +11,7 @@ const Reviews = ({ name, role, location, image, review }) => {
             className="bg-white shadow-lg rounded-2xl p-6 max-w-lg relative"
         >
             <div className="flex items-center gap-4">
-                <img src={image || "/defUser.jpg"} alt={name} className="w-14 h-14 rounded-full border" loading="lazy"
+                <img src={image || "/defUser.webp"} alt={name} className="w-14 h-14 rounded-full border" loading="lazy"
                 />
                 <div>
                     <h3 className="font-bold text-gray-900 text-lg">{name}</h3>

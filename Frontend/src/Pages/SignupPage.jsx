@@ -150,7 +150,7 @@ const SignupPage = () => {
 
               {/* Password Field */}
               <div className="relative">
-                <input name="password" type={showPassword ? "text" : "password"} value={formData.password} onChange={handleChange} className="input-field pr-12" placeholder="Enter password" />
+                <input name="password" type={showPassword ? "text" : "password"} value={formData.password} onChange={handleChange} className="input-field pr-12" placeholder="Create Your password" />
                 <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-4 top-3 text-gray-600">
                   {showPassword ? <EyeOffIcon size={20} /> : <EyeIcon size={20} />}
                 </button>
@@ -160,7 +160,7 @@ const SignupPage = () => {
               <input name="address.street" value={formData.address.street} onChange={handleChange} className="input-field" placeholder="Street Address" />
               <input name="address.city" value={formData.address.city} onChange={handleChange} className="input-field" placeholder="City" />
               <input name="address.state" value={formData.address.state} onChange={handleChange} className="input-field" placeholder="State" />
-              <input name="address.zipCode" value={formData.address.zipCode} onChange={handleChange} className="input-field" placeholder="Zip Code" />
+              <input name="address.zipCode" value={formData.address.zipCode} onChange={handleChange} className="input-field" placeholder="Pin Code" />
               <input name="address.country" value={formData.address.country} onChange={handleChange} className="input-field" placeholder="Country" />
 
               {/* Role Selection (Dropdown) */}
