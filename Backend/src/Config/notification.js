@@ -41,7 +41,7 @@ const sendNotification = async (type, data, method) => {
                 Congratulations! Your tutor verification has been successfully approved. You are now an official tutor on Gurukul and eligible to start tutoring.  
             
                 **Guidelines & Next Steps:** 
-                 
+
                 - **Tutor Assignments:** Please be patient as we match you with students based on their requirements. You will be notified when a suitable student is assigned to you.  
                 
                 - **Professional Conduct:** We expect all tutors to maintain professionalism, adhere to scheduled sessions, and provide quality education to students.
