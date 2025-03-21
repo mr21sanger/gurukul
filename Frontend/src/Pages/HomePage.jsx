@@ -84,27 +84,29 @@ const HomePage = () => {
                             Personalized home tutoring services tailored to your child's needs.
                         </motion.p>
 
+
                         {/* Buttons */}
                         <div className="flex justify-center md:justify-start gap-4 sm:gap-6 mt-3 z-50">
                             <motion.button
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
+                                whileHover={{ scale: 1.08 }}
+                                whileTap={{ scale: 0.92 }}
                                 transition={{ duration: 0.2 }}
                                 onClick={() => handleHeroButtonClick("Student")}
-                                className="bg-orange-500 text-white px-5 sm:px-6 py-3 rounded-lg font-semibold text-base sm:text-lg shadow-md hover:bg-orange-600 transition-all"
+                                className="bg-orange-600 text-white px-6 sm:px-7 py-3.5 rounded-xl font-semibold text-lg sm:text-xl shadow-md hover:bg-orange-700 hover:shadow-lg focus:ring-4 focus:ring-orange-300 transition-all"
                             >
                                 Hire a Tutor
                             </motion.button>
 
                             <motion.button
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
+                                whileHover={{ scale: 1.08 }}
+                                whileTap={{ scale: 0.92 }}
                                 transition={{ duration: 0.2 }}
                                 onClick={() => handleHeroButtonClick("Instructor")}
-                                className="border-2 border-orange-500 text-orange-500 px-5 font-bold sm:px-6 py-3 rounded-lg text-base sm:text-lg hover:bg-orange-500 hover:text-white transition-all"
+                                className="border-2 border-orange-600 text-orange-600 px-6 sm:px-7 py-3.5 rounded-xl font-semibold text-lg sm:text-xl bg-orange-50 hover:bg-orange-600 hover:text-white hover:shadow-lg focus:ring-4 focus:ring-orange-300 transition-all"
                             >
                                 Get Hired as a Tutor
                             </motion.button>
+
                         </div>
                     </div>
 
