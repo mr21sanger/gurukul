@@ -26,9 +26,9 @@ const faqs = [
 ];
 
 const contacts = [
-  { icon: <Mail size={40} />, title: "Email", value: "support@Gurukul.com" },
-  { icon: <Phone size={40} />, title: "Phone", value: "+91 98765 43210" },
-  { icon: <MapPin size={40} />, title: "Location", value: "New Delhi, India" },
+  { icon: <Mail size={40} />, title: "Email", value: "gurukulorganisation@gmail.com" },
+  { icon: <Phone size={40} />, title: "Phone", value: "+91 9891061356" },
+  { icon: <MapPin size={40} />, title: "Location", value: "Faridabad, India" },
 ];
 
 const ContactUs = () => {
