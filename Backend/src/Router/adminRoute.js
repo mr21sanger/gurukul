@@ -17,6 +17,9 @@ const initializeSocket = (server) => {
     });
 
     io.on("connection", (socket) => {
+
+        console.log("A user connected:", socket.id);
+
         // GET ALL THE COUNTS OF USERS
         socket.on("getUsers", async () => {
             try {
