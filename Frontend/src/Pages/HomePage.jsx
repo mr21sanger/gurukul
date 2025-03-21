@@ -62,7 +62,7 @@ const HomePage = () => {
 
     return (
         <>
-            <div className="relative top-26 md:top-24 w-full flex items-center justify-center text-white bg-gradient-to-b from-orange-200 to-orange-50 overflow-hidden px-6 z-10 mb-28 md:mb-10">
+            <div className="relative top-26 md:top-24 w-full flex items-center justify-center text-white bg-gradient-to-b from-orange-200 to-orange-50 overflow-hidden px-6 z-10 mb-28 md:mb-16">
                 <div className="max-w-7xl w-full flex flex-col md:flex-row items-center gap-6 px-4 sm:px-8 lg:px-12">
                     {/* Left Side - Text Content */}
                     <div className="md:w-1/2 text-center font-semibold md:text-left">
