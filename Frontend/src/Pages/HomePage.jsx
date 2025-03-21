@@ -115,8 +115,9 @@ const HomePage = () => {
 
                     <div className="md:w-1/2 flex justify-center">
                         <img
-                            src="/hero.png"
+                            src="/hero.webp"
                             alt="Online Tutor"
+                            loading="lazy"
                             className="w-[90vw] mb-14 md:mb-10 sm:w-[75vw] md:w-[50vw] lg:w-[40vw] max-w-md"
                         />
                     </div>
