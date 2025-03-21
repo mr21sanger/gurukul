@@ -62,7 +62,7 @@ const HomePage = () => {
 
     return (
         <>
-            <div className="relative top-26 md:top-24 w-full min-h-[85vh] mb-18 flex items-center justify-center text-white bg-gradient-to-b from-orange-200 to-orange-50 overflow-hidden px-6 md:pb-60 z-10 md:mb-44">
+            <div className="relative top-26 md:top-24 w-full flex items-center justify-center text-white bg-gradient-to-b from-orange-200 to-orange-50 overflow-hidden px-6 z-10 mb-28 md:mb-10">
                 <div className="max-w-7xl w-full flex flex-col md:flex-row items-center gap-6 px-4 sm:px-8 lg:px-12">
                     {/* Left Side - Text Content */}
                     <div className="md:w-1/2 text-center font-semibold md:text-left">
@@ -110,36 +110,22 @@ const HomePage = () => {
                                 Get Hired as a Tutor
                             </motion.button>
                         </div>
+
                     </div>
 
                     <div className="md:w-1/2 flex justify-center">
                         <img
-                            src="/hero.webp"
+                            src="/hero.png"
                             alt="Online Tutor"
-                            className="w-[90vw] sm:w-[75vw] md:w-[50vw] lg:w-[40vw] max-w-md"
+                            className="w-[90vw] mb-14 md:mb-10 sm:w-[75vw] md:w-[50vw] lg:w-[40vw] max-w-md"
                         />
                     </div>
                 </div>
 
-
             </div>
-
-            <motion.div
-
-                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute bottom-[-95px] left-0 w-full z-10 hidden sm:block"
-            >
-
-                <svg className="w-full h-full  " viewBox="0 0 1440 320" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        fill="#ffd69f"
-                        fillOpacity="1"
-                        d="M0,160L60,176C120,192,240,224,360,224C480,224,600,192,720,181.3C840,171,960,181,1080,176C1200,171,1320,149,1380,138.7L1440,128L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"
-                    />
-                </svg>
-            </motion.div>
-
-
+            <div className="bg-orange-50">
+                <svg xmlns="http://www.w3.org/2000/svg" className="hidden md:block mt-16" viewBox="0 0 1440 320"><path fill="#FECF96" fill-opacity="1" d="M0,64L21.8,69.3C43.6,75,87,85,131,80C174.5,75,218,53,262,58.7C305.5,64,349,96,393,101.3C436.4,107,480,85,524,96C567.3,107,611,149,655,170.7C698.2,192,742,192,785,165.3C829.1,139,873,85,916,80C960,75,1004,117,1047,144C1090.9,171,1135,181,1178,181.3C1221.8,181,1265,171,1309,154.7C1352.7,139,1396,117,1418,106.7L1440,96L1440,320L1418.2,320C1396.4,320,1353,320,1309,320C1265.5,320,1222,320,1178,320C1134.5,320,1091,320,1047,320C1003.6,320,960,320,916,320C872.7,320,829,320,785,320C741.8,320,698,320,655,320C610.9,320,567,320,524,320C480,320,436,320,393,320C349.1,320,305,320,262,320C218.2,320,175,320,131,320C87.3,320,44,320,22,320L0,320Z"></path></svg>
+            </div>
 
             {/* Detail Section */}
             <motion.div
@@ -147,11 +133,11 @@ const HomePage = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8 }}
                 viewport={{ once: true }}
-                className="relative z-10 bg-orange-50 px-6 max-w-7xl  mx-auto flex flex-col md:flex-row-reverse items-center justify-between gap-12 md:gap-24 py-16 min-h-[85vh]"
+                className="relative z-10 px-6 mt- md:px-12 lg:px-20 w-full bg-white mx-auto flex flex-col md:flex-row-reverse items-center justify-between gap-12 md:gap-24 py-16 min-h-[85vh]"
             >
                 {/* Text Content */}
-                <div className="md:w-1/2 mt-12 text-center md:text-left">
-                    <h2 className="text-5xl md:text-5xl font-bold mb-6 text-gray-900">
+                <div className="w-full md:w-1/2 mt-12 text-center md:text-left">
+                    <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">
                         Personalized Learning Experience
                     </h2>
                     <p className="text-lg md:text-xl mb-6 text-gray-800">
@@ -160,16 +146,15 @@ const HomePage = () => {
                 </div>
 
                 {/* Image */}
-                <div className="md:w-1/2 flex justify-center">
+                <div className="w-full md:w-1/2 flex justify-center">
                     <img
                         src="/6-removebg-preview.webp"
                         alt="Tutoring session"
-                        loading="lazy"
-                        className="w-full max-w-md md:max-w-lg rounded-lg"
+                        loading = "lazy"
+                        className="w-full max-w-md md:max-w-lg lg:max-w-xl rounded-lg"
                     />
                 </div>
             </motion.div>
-
 
             {/* Why Choose Us */}
             <div className="w-full py-16 flex justify-center items-center bg-gradient-to-b from-orange-200 to-orange-100 text-white px-6">
