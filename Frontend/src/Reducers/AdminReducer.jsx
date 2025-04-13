@@ -81,6 +81,8 @@ const reducer = (state, action) => {
 export const AdminProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const token = localStorage.getItem("adminToken") || "";
+  const baseUrl = "https://gurukul-learn.online/";
+
 
   useEffect(() => {
     socket.emit("getVerificationRequests"); // Request verification data
@@ -130,7 +132,7 @@ export const AdminProvider = ({ children }) => {
   const adminLogin = async (data) => {
     dispatch({ type: "Set_Error", payload: null });
     try {
-      const res = await axios.post("http://localhost:3000/admin/login-as-Admin", data);
+      const res = await axios.post(`${baseUrl}admin/login-as-Admin`, data);
       dispatch({ type: "Set_Admin", payload: res.data.admin });
       localStorage.setItem("adminToken", res.data.token);
       localStorage.setItem("admin", JSON.stringify(res.data.admin));
@@ -144,7 +146,7 @@ export const AdminProvider = ({ children }) => {
   const getComplaints = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:3000/user/complaint/get-all-complaints",
+        `${baseUrl}/user/complaint/get-all-complaints`,
         {
           headers: {
             Authorization: `Bearer ${token}`, // Token for authentication
