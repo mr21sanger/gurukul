@@ -138,18 +138,30 @@ const initializeSocket = (server) => {
                 .lean();
 
             // Filter out only pending or not assigned requests
-            const pendingRequests = parentRequests.filter(request => request.tutorRequests.length > 0 && // Ensure user has made at least one request
-                (
-                    !request.assigned ||
-                    request.tutorAssigned?.status === 'pending' ||
-                    request.tutorRequests.some(req => req.status === 'pending')
-                ));
+
+            const pendingRequests = parentRequests
+                .filter(request => request.tutorRequests.length > 0 &&
+                    (
+                        !request.assigned ||
+                        request.tutorAssigned?.status === "pending" ||
+                        request.tutorRequests.some(req => req.status === "pending")
+                    )
+                )
+                .map(request => ({
+                    parentName: request.userId?.firstName + " " + request.userId?.lastName || "Unknown",
+                    parentAddress: request.userId?.address || "Not Provided",
+                    subject: request.tutorRequests[0]?.subject || "N/A",
+                    classLevel: request.tutorRequests[0]?.classLevel || "N/A",
+                    requestId: request._id,
+                    date: request.tutorRequests[0]?.postedAt
+                }));
+
 
             io.emit("pendingRequests", {
                 status: true,
-                message: "Fetched Pending Request SuccessFully",
+                message: "Fetched Pending Requests Successfully",
                 pendingRequests
-            })
+            });
 
         });
 
