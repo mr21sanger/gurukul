@@ -2,7 +2,7 @@ import { createContext, useContext, useEffect, useReducer } from "react";
 import { io } from "socket.io-client";
 import axios from "axios";
 
-const socket = io("http://localhost:3000"); // Connect to Socket.io server
+const socket = io("https://gurukul-learn.online"); // Connect to Socket.io server
 
 const AdminContext = createContext();
 
