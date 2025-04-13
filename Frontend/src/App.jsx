@@ -15,6 +15,7 @@ import VerificationPage from "./Pages/VeriFicationPage";
 import AdminDash from "./Pages/Admin/AdminDash";
 import ResetPassword from "./Components/ResetPassword";
 import Error from "./Pages/Error";
+import AdminLoginPage from "./Pages/Admin/AdminLoginPage";
 
 function App() {
   const location = useLocation();
@@ -24,9 +25,11 @@ function App() {
     "/get-started/signup",
     "/get-started/login",
     "/reset-password",
-    "/admin-dash",
+    "/admin-dashboard",
+    "/admin-login",
     "*"
-  ].includes(location.pathname) || location.pathname.startsWith("/verification/");
+  ].includes(location.pathname) || location.pathname.startsWith("/verification/") ||
+    location.pathname.startsWith("/admin-dashboard");
 
   return (
     <>
@@ -38,10 +41,11 @@ function App() {
           <Route path="/About" element={<AboutUs />} />
           <Route path="/Contact" element={<ContactUs />} />
           <Route path="/get-started/login" element={<LoginPage />} />
+          <Route path="/admin-login" element={<AdminLoginPage />} />
           <Route path="/get-started/signup" element={<SignupPage />} />
           <Route path="/parent-dash" element={<ParentDash />} />
           <Route path="/tutor-dash" element={<TutorDash />} />
-          <Route path="/admin-dash" element={<AdminDash />} />
+          <Route path="/admin-dashboard/:id" element={<AdminDash />} />
           <Route path="/verification/:id" element={<VerificationPage />} />
           <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="*" element={<Error />} />

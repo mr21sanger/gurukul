@@ -2,7 +2,8 @@ const express = require("express");
 const http = require("http");
 const cors = require("cors");
 const userRoutes = require("./src/Router/user");
-const complaintRoutes = require("./src/Router/complaint")
+const complaintRoutes = require("./src/Router/complaint");
+const adminRoutes = require("./src/Router/adminLogRoute");
 const verificationRoutes = require("./src/Router/verificationRouter");
 const { initializeSocket } = require("./src/Router/adminRoute"); // Import socket file
 require("./src/Config/DBConfig");
@@ -29,6 +30,8 @@ app.use(
 app.use("/user", userRoutes);
 app.use("/user/complaint", complaintRoutes);
 app.use("/user/verify", verificationRoutes);
+app.use("/admin", adminRoutes);
+
 
 app.use(express.static(path.join(_dirName, "/Frontend/dist")))
 app.get("*", (req, res) => {

@@ -19,8 +19,20 @@ router.post("/post-a-complaint/:id", verifyToken, async (req, res) => {
             description,
             tutor: tutorId || null, // Optional Tutor ID
         });
-
         await newComplaint.save();
+
+        // Extract necessary information
+        const user = await User.findById(id); // Assuming 'User' model exists
+        const complaintInfo = {
+            userName: user.firstName,  // You can change it based on the field you want (firstName or fullName)
+            complaintType: newComplaint.complaintType,
+            type: "complaint",
+            timePosted: newComplaint.createdAt,  // Using the automatically generated 'createdAt' field
+        };
+
+        const io = getIo()
+        io.emit('activityUpdate', complaintInfo);
+
         res.status(201).json({ message: "Complaint filed successfully!", complaint: newComplaint, status: true });
     } catch (error) {
         res.status(500).json({ message: "Server error.", error: error.message });

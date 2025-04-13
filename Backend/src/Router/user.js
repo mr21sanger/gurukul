@@ -11,6 +11,8 @@ dotenv.config();
 const upload = require("../MiddleWare/multer");
 const sendNotification = require("../Config/notification");
 const verifyToken = require("../MiddleWare/auth");
+const { getIo } = require("../Router/adminRoute");
+
 
 //SIGN UP ROUTER
 router.post("/signup", async (req, res) => {
@@ -81,6 +83,14 @@ router.post("/signup", async (req, res) => {
         // Generate JWT Token
         const token = jwt.sign({ userId: newUser._id, role: newUser.role }, process.env.SECRET_KEY, { expiresIn: "7d" });
 
+        const newUserInfo = {
+            userName: newUser.firstName,  // Use firstName or fullName as needed
+            userType: newUser.role,  // Role could be 'Tutor' or 'Parent/Student'
+            type: "new_user",
+            timeJoined: newUser.createdAt,  // Auto-generated timestamp
+        };
+        const io = getIo();
+        io.emit('activityUpdate', newUserInfo);
 
         res.status(201).json({
             message: "User registered successfully!",
@@ -151,8 +161,18 @@ router.post("/request-tutor", verifyToken, async (req, res) => {
             fee,
             locality,
             phone: parent.userId.phone,
-        
+
         }
+
+        // Tutor Request Event
+        const tutorRequestInfo = {
+            parentName: parent.firstName,
+            type: "request",
+            timePosted: requestData.createdAt,
+        };
+
+        const io = getIo();
+        io.emit('activityUpdate', tutorRequestInfo);
 
         sendNotification("NEW_TUTOR_REQUEST", data, "telegram")
         res.status(201).json({ message: "Tutor request posted successfully!", tutorRequests: parent.tutorRequests });
@@ -230,6 +250,17 @@ router.put("/upload-verification/:id", verifyToken, upload.fields([
 
             await tutor.save();
         }
+
+        // Verification Request Event
+        const verificationRequestInfo = {
+            tutorName: tutor.firstName,
+            verificationStatus: tutor.verificationStatus,
+            type: "request",
+            timeRequested: tutor.createdAt,
+        };
+
+        const io = getIo();
+        io.emit('activityUpdate', verificationRequestInfo);
 
         res.status(200).json({
             message: "Files uploaded successfully",
@@ -640,7 +671,7 @@ router.post("/forgot-password", async (req, res) => {
 
         // ✅ Generate Reset Link (localhost for now)
         const resetLink = `${process.env.url}reset-password?token=${resetToken}`;
-        
+
         // Send reset token via email with the link
         const data = { resetLink, email };
         await sendNotification("RESET_PASSWORD", data, "email");

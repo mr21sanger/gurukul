@@ -1,92 +1,110 @@
 import { useState } from "react";
-import Sidebar from "./Sidebar";
-import StatsCard from "./StatsCard";
+import { FiUsers, FiUserCheck, FiUserPlus, FiAlertTriangle } from "react-icons/fi";
+import { MdAssignmentInd } from "react-icons/md";
 import VerificationRequests from "./VerificationRequests";
 import Complaint from "./Complaint";
-import { useAdmin } from "../../Reducers/AdminReducer";
 import AssignTutorPage from "./AssignTutorPage";
+import { useAdmin } from "../../Reducers/AdminReducer";
+import AdminNavbar from "./AdminNavbar";
+import RecentActivityTables from "../../Components/RecentActivityTable";
 
 function AdminDash() {
     const [activeSection, setActiveSection] = useState("Dashboard");
+    const { totalUsersCount, admin, complaints } = useAdmin();
 
-    const [stats, setStats] = useState({
-        totalUsers: 500,
-        totalTutors: 150,
-        totalParents: 350,
-        tutorRequests: 120,
-        verificationRequests: 15,
-        complaints: 8,
-    });
+    const {
+        parentCount = 0,
+        tutorCount = 0,
+        totalUsers = 0,
+        verifiedTutors = 0,
+        tutorRequests = 0,
+        verificationRequests = 0,
+        totalComplaints = 0
+    } = totalUsersCount || {};
 
-    const { totalUsersCount, verifyUser } = useAdmin()
 
-    const [verificationRequests, setVerificationRequests] = useState([
-        { id: 1, name: "John Doe", email: "john@example.com", status: "Pending", documents: ["/images/doc1.webp"] },
-        { id: 2, name: "Jane Smith", email: "jane@example.com", status: "Pending", documents: ["/images/doc2.webp"] },
-    ]);
+    const stats = [
+        { title: "Total Users", value: totalUsers, icon: <FiUsers className="text-indigo-600 text-3xl" /> },
+        { title: "Total Tutors", value: tutorCount, icon: <MdAssignmentInd className="text-blue-600 text-3xl" /> },
+        { title: "Total Parents", value: parentCount, icon: <FiUserPlus className="text-green-600 text-3xl" /> },
+        { title: "Verified Tutors", value: verifiedTutors, icon: <FiUserCheck className="text-purple-600 text-3xl" /> },
+        { title: "Tutor Requests", value: tutorRequests, icon: <MdAssignmentInd className="text-yellow-600 text-3xl" /> },
+        { title: "Verification Requests", value: verificationRequests, icon: <FiUserCheck className="text-teal-600 text-3xl" /> },
+        { title: "Total Complaints", value: totalComplaints, icon: <FiAlertTriangle className="text-red-600 text-3xl" /> },
+    ];
 
-    const [complaints, setComplaints] = useState([
-        { id: 1, user: "Parent A", issue: "Issue with tutor", status: "Pending" },
-        { id: 2, user: "Tutor B", issue: "Resolved issue", status: "Resolved" },
-    ]);
-
-    const handleVerification = (id, action) => {
-        verifyUser(id, action)
-    };
-    const [newJoiners, setNewJoiners] = useState([
-        { id: 1, name: "Emily Johnson", role: "Tutor", joinedOn: "2025-02-25" },
-        { id: 2, name: "Michael Brown", role: "Parent", joinedOn: "2025-02-26" },
-    ]);
     return (
-        <div className="flex flex-col md:flex-row h-screen bg-gray-100 my-16">
-            <Sidebar activeSection={activeSection} onNavigate={setActiveSection} />
-            <div className="flex-1 p-4 md:p-6 overflow-auto">
-                <h1 className="text-3xl font-bold mb-6">{activeSection}</h1>
+        <div className="min-h-screen bg-gray-100 flex flex-col">
+            {/* Navbar - Stays at the Top */}
+            <div className="sticky top-0 z-50 bg-white shadow-md">
+                <AdminNavbar setActiveSection={setActiveSection} name={admin?.firstName} activeSection={activeSection} />
+            </div>
 
-                {activeSection === "Dashboard" && (
-                    <>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-                            {Object.entries(stats).map(([key, value]) => (
-                                <StatsCard key={key} title={key} value={value} />
-                            ))}
-                        </div>
+            {/* Main Dashboard Layout */}
+            <div className="flex-1 p-6 flex flex-col md:flex-row gap-6">
 
-                        <div className="bg-white p-4 shadow-md mt-4 rounded-lg">
-                            <h2 className="text-xl font-semibold mb-4">New Joiners</h2>
-                            <table className="min-w-full border-collapse border border-gray-300">
-                                <thead>
-                                    <tr className="bg-gray-200">
-                                        <th className="border border-gray-300 p-2">ID</th>
-                                        <th className="border border-gray-300 p-2">Name</th>
-                                        <th className="border border-gray-300 p-2">Role</th>
-                                        <th className="border border-gray-300 p-2">Joined On</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {newJoiners.map((joiner) => (
-                                        <tr key={joiner.id} className="text-center">
-                                            <td className="border border-gray-300 p-2">{joiner.id}</td>
-                                            <td className="border border-gray-300 p-2">{joiner.name}</td>
-                                            <td className="border border-gray-300 p-2">{joiner.role}</td>
-                                            <td className="border border-gray-300 p-2">{joiner.joinedOn}</td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div></>
-                )}
+                {/* Admin Profile Card - Stays Fixed on the Side */}
+                <div className="hidden md:flex h-96 w-72 bg-white shadow-lg rounded-2xl p-6 border border-gray-200 flex-col items-center text-center sticky top-20">
+                    {/* Profile Image */}
+                    <div className="w-24 h-24 rounded-full bg-gradient-to-r from-indigo-500 to-purple-600 text-white flex items-center justify-center text-4xl font-bold shadow-lg">
+                        {admin?.firstName?.charAt(0)}
+                    </div>
+                    <h2 className="text-lg font-semibold text-gray-800 mt-3">{admin?.firstName} {admin?.lastName}</h2>
+                    <p className="text-gray-500 text-sm">{admin?.email}</p>
+                    <span className="bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full text-xs font-medium mt-2">
+                        Administrator
+                    </span>
 
-                {activeSection === "Verifications" && (
-                    <VerificationRequests verificationRequests={verificationRequests} handleVerification={handleVerification} />
-                )}
+                    {/* Additional Admin Info */}
+                    <div className="mt-4 space-y-2 text-xs text-gray-700 text-left w-full px-2">
+                        <p><span className="font-semibold">Email:</span> {admin?.email}</p>
+                        <p><span className="font-semibold">Role:</span> Administrator</p>
+                        <p><span className="font-semibold">Total Users:</span> {totalUsers}</p>
+                    </div>
 
-                {activeSection === "Complaints" && <Complaint complaints={complaints} />}
-                {activeSection === "Assign Tutor" && <AssignTutorPage />}
+                    {/* Action Buttons */}
+                    <div className="mt-4 flex gap-3">
+                        <button className="px-5 py-2 bg-indigo-600 text-white text-sm font-medium rounded-lg">
+                            Edit Profile
+                        </button>
+                        <button className="px-5 py-2 bg-gray-300 text-gray-700 text-sm font-medium rounded-lg">
+                            Logout
+                        </button>
+                    </div>
+                </div>
 
-                {/* Add other sections here as needed */}
+                {/* Dashboard Content */}
+                <div className="flex-1">
+                    {/* Section Title */}
+                    {/* <h1 className="text-3xl font-bold text-gray-800 mb-4">{activeSection}</h1> */}
+
+                    {/* Section Content */}
+                    {activeSection === "Dashboard" && (
+                        <>
+                            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                                {stats.map((stat, index) => (
+                                    <div
+                                        key={index}
+                                        className="p-6 rounded-xl shadow-md bg-white flex flex-col items-center border border-gray-200"
+                                    >
+                                        {stat.icon}
+                                        <h2 className="text-sm font-semibold text-gray-600 mt-2">{stat.title}</h2>
+                                        <p className="text-3xl font-bold text-indigo-700">{stat.value}</p>
+                                    </div>
+                                ))}
+                            </div>
+                            <RecentActivityTables />
+                        </>
+                    )}
+
+                    {activeSection === "Verifications" && <VerificationRequests />}
+                    {activeSection === "Complaints" && <Complaint />}
+                    {activeSection === "Assign Tutor" && <AssignTutorPage />}
+                </div>
             </div>
         </div>
     );
+
 }
 
-export default AdminDash
+export default AdminDash;
