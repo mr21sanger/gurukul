@@ -14,7 +14,7 @@ function AdminNavbar({ setActiveSection, activeSection, name = "Admin" }) {
     return (
         <nav className="bg-white z-50 text-gray-800 shadow-md px-6 py-4 flex justify-between items-center">
             {/* Logo */}
-            <img src="/logo.png" alt="Logo" className="h-10 cursor-pointer" />
+            <img src="/logo.webp" alt="Logo" className="h-10 cursor-pointer" />
 
             {/* Desktop Menu */}
             <div className="hidden md:flex space-x-8 items-center">
