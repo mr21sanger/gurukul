@@ -24,6 +24,7 @@ function AssignTutorPage() {
             })
             .catch((err) => console.error("Assignment failed", err));
     };
+    console.log(pendingTutorRequests)
 
     return (
         <div className="p-6 min-h-screen bg-gray-100">

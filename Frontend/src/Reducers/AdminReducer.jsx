@@ -100,6 +100,7 @@ export const AdminProvider = ({ children }) => {
     });
 
     socket.on("pendingRequests", (data) => {
+      console.log(data)
       dispatch({ type: "Set_Pending_Tutor_Requests", payload: data.pendingRequests });
     });
 
