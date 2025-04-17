@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useAdmin } from "../../Reducers/AdminReducer";
-import InstructorInfoCard from "./InstructorInfoCard";
 import { motion } from "framer-motion";
+import InstructorInfoCard from "../../Components/InstructorInfoCard";
 
 const VerifiedTutors = () => {
   const { tutors } = useAdmin();
