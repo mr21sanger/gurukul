@@ -27,7 +27,7 @@ const faqs = [
 
 const contacts = [
   { icon: <Mail size={40} />, title: "Email", value: "gurukulorganisation@gmail.com" },
-  { icon: <Phone size={40} />, title: "Phone", value: "+91 9891061356" },
+  { icon: <Phone size={40} />, title: "Phone", value: "+91 97111 76093" },
   { icon: <MapPin size={40} />, title: "Location", value: "Faridabad, India" },
 ];
 

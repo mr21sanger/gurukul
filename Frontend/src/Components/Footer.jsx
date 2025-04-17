@@ -23,10 +23,10 @@ const Footer = () => {
                             <a href="#" className="bg-orange-500 p-3 rounded-full hover:bg-orange-600 transition" target="_blank">
                                 <Twitter className="text-white" size={20} />
                             </a>
-                            <a href="https://www.linkedin.com/in/gurukul-organisation-895a1a356/" className="bg-orange-500 p-3 rounded-full hover:bg-orange-600 transition" target="_blank">
+                            <a href="https://www.linkedin.com/company/gurukul-learn/posts/?feedView=all" className="bg-orange-500 p-3 rounded-full hover:bg-orange-600 transition" target="_blank">
                                 <Linkedin className="text-white" size={20} />
                             </a>
-                            <a href="#" className="bg-orange-500 p-3 rounded-full hover:bg-orange-600 transition" target="_blank">
+                            <a href="https://www.instagram.com/gurukul.learn_/?next=%2F" className="bg-orange-500 p-3 rounded-full hover:bg-orange-600 transition" target="_blank">
                                 <MessageCircle className="text-white" size={20} /> {/* Instagram Placeholder */}
                             </a>
                         </div>
@@ -37,13 +37,13 @@ const Footer = () => {
                         <h3 className="font-semibold text-lg">Have a question? Contact us</h3>
                         <div className="flex flex-col gap-2 mt-3 text-sm">
                             <p className="flex items-center justify-center md:justify-start gap-2">
-                                <Phone size={18} /> +919891061356 (Mon-Sat 9am-6pm IST)
+                                <Phone size={18} /> +91 97111 76093 (Mon-Sat 9am-6pm IST)
                             </p>
                             <p className="flex items-center justify-center md:justify-start gap-2">
                                 <Mail size={18} /> gurukulorganisation@gmail.com
                             </p>
                             <p className="flex items-center justify-center md:justify-start gap-2">
-                                <MessageCircle size={18} /> WhatsApp: +919891061356
+                                <MessageCircle size={18} /> WhatsApp: +91 97111 76093
                             </p>
                         </div>
                     </div>
