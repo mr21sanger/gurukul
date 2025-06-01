@@ -225,6 +225,7 @@ const sendEmailNotification = async (to, subject, message) => {
 const sendTelegramNotification = async (chatId, token, message) => {
     try {
         const botToken = token;
+        console.log(botToken)
         const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
         await axios.post(url, { chat_id: chatId, text: message });
     } catch (error) {
