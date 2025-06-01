@@ -97,7 +97,7 @@ const sendNotification = async (type, data, method) => {
 
 
 
-        case "NEW_TUTOR_REQUEST":
+         case "NEW_TUTOR_REQUEST":
             subject = "New Tutoring Request Available";
             message = `Hello, Experts!  
     
@@ -113,6 +113,8 @@ const sendNotification = async (type, data, method) => {
     💰 *Fee Offered:* ₹${data.fee}/month  
     📍 *Location:* ${data.locality}  
     📞 *Contact:* ${data.phone}  
+    🏫 *School:* ${data.school}  
+    🎓 *Mode of Teaching:* ${data.mode}  
     
     If you are interested, kindly respond at the earliest.  
     
@@ -120,7 +122,6 @@ const sendNotification = async (type, data, method) => {
     Gurukul Team  
     🌐 https://gurukul-learn.online/`;
             break;
-
 
 
         case "RESET_PASSWORD":

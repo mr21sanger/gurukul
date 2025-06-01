@@ -118,7 +118,7 @@ router.post("/request-tutor", verifyToken, async (req, res) => {
             genderPreferred,
             timePreferred,
             fee,
-            locality, parentId
+            locality, parentId, mode
         } = req.body;
 
 
@@ -145,7 +145,10 @@ router.post("/request-tutor", verifyToken, async (req, res) => {
             previousMarks: previousMarks || "Not Specified",
             postedAt: new Date(),
             locality: locality,
-            school: school || "Not Specified"
+            school: school || "Not Specified",
+            mode: mode || "Both",
+            timePreference: timePreferred || "Flexible"
+
         };
 
         parent.tutorRequests.push(newRequest);
@@ -160,6 +163,7 @@ router.post("/request-tutor", verifyToken, async (req, res) => {
             availableDays: availableDays.length,
             fee,
             locality,
+            mode,school,
             phone: parent.userId.phone,
 
         }

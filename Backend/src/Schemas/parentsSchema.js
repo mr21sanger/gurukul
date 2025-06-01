@@ -12,10 +12,18 @@ const ParentSchema = new mongoose.Schema({
       classLevel: String,
       availableDays: [String],
       school: { type: String, required: true },
+      mode: {
+        type: String,
+        enum: ['Online', 'Offline', 'Both'],
+        default: 'Both',
+      },
       previousMarks: String,
       postedAt: { type: Date, default: Date.now },
-      locality: { type: String, required: true }, // Added Address field
-      // school: { type: String, required: true }, // Added School field
+      locality: { type: String, required: true },
+      school: { type: String, required: true }, 
+      timePreference: {
+        type: String
+      }
     }
   ],
   tutorAssigned: {

@@ -15,6 +15,7 @@ const HireTutorModal = ({ isOpen, onClose, parentId }) => {
     timePreferred: "",
     fee: "",
     locality: "",
+    mode: "",
   });
 
   if (!isOpen) return null;
@@ -48,6 +49,24 @@ const HireTutorModal = ({ isOpen, onClose, parentId }) => {
       console.error("Error submitting tutor request:", error);
     }
   };
+
+  const handleDoneClick = () => {
+    setIsSuccess(false)
+    onClose()
+    setStep(1)
+    setFormData({
+      subject: "",
+      classLevel: "",
+      school: "",
+      previousMarks: "",
+      availableDays: [],
+      timePreferred: "",
+      fee: "",
+      locality: "",
+      mode: "",
+    });
+
+  }
 
   const nextStep = () => setStep((prev) => prev + 1);
   const prevStep = () => setStep((prev) => prev - 1);
@@ -139,6 +158,28 @@ const HireTutorModal = ({ isOpen, onClose, parentId }) => {
                 required
               />
             </div>
+
+            {/* Mode of Teaching */}
+            <div>
+              <label className="block text-gray-700 font-medium">Mode of Teaching</label>
+              <div className="flex gap-3 mt-2">
+                {["Online", "Offline", "Both"].map((mode) => (
+                  <button
+                    key={mode}
+                    type="button"
+                    className={`px-4 py-2 rounded-md border transition ${formData.mode === mode
+                      ? "bg-yellow-500 text-white border-yellow-500"
+                      : "border-gray-400 text-gray-600"
+                      }`}
+                    onClick={() =>
+                      setFormData((prev) => ({ ...prev, mode: mode }))
+                    }
+                  >
+                    {mode}
+                  </button>
+                ))}
+              </div>
+            </div>
           </div>
         </>
       ),
@@ -215,7 +256,7 @@ const HireTutorModal = ({ isOpen, onClose, parentId }) => {
             </motion.div>
             <h2 className="text-2xl font-semibold text-black">Success!</h2>
             <p className="text-gray-600 mt-2">Your tutor request has been submitted successfully.</p>
-            <button className="btn-primary mt-6" onClick={onClose}>
+            <button className="btn-primary mt-6" onClick={handleDoneClick}>
               Done
             </button>
           </div>
