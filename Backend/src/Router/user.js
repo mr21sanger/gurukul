@@ -151,7 +151,7 @@ router.post("/request-tutor", verifyToken, async (req, res) => {
 
         };
 
-        parent.tutorRequests.push(newRequest);
+        const requestData = parent.tutorRequests.push(newRequest);
         await parent.save(); // Save in database
 
         const data = {
